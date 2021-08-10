@@ -1,0 +1,24 @@
+.h1ErrorPage{
+    margin-top: 60px;
+    color: #282c34;
+    margin-right: 5%;
+    font-size: 60px;
+    line-height: 65px;
+    font-weight: 700; 
+}
+
+.p1ErrorPage{
+    margin-left: 5%;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #6d6d6d;
+}
+
+.p2ErrorPage{
+    margin-left: 5%;
+    margin-top: 30px;
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 42em;
+}

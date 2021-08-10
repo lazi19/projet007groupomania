@@ -1,5 +1,67 @@
 
 
+// Import express
+import express from "express";
+import bodyParser from "body-parser";
+
+// Import cors
+import cors from "cors";
+
+// Import connection
+import db from "./config/database.js";
+
+// Import router
+// import Router from "./routes/userRoute.js";
+import userRoutes from "./routes/userRoute.js";
+import postRoutes from "./routes/postRoute.js";
+ 
+// Init express
+const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+// use express json
+app.use(express.json());
+
+// const corsOptions = {
+//     origin: process.env.CLIENT_URL,
+//     credentials: true,
+//     'allowedHeaders': ['sessionId', 'Content-Type'],
+//     'exposedHeaders': ['sessionId'],
+//     'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//     'preflightContinue': false
+//   }
+//   app.use(cors(corsOptions));
+
+
+// use cors
+app.use(cors());
+ 
+// Testing database connection 
+try {
+    await db.authenticate();
+    console.log('Connection has been established successfully.');
+
+} catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
+ 
+// use router
+app.use('/api/users', userRoutes); // Va servir les routes dédiées au users
+
+app.use('/api/posts', postRoutes); // Va servir les routes dédiées au poste
+
+
+// app.use(Router);
+ 
+// listen on port
+app.listen((5000), () => console.log('Server running at http://localhost:5000'));
+
+
+
+
+
 // // const http = require('http');
 // import http from 'http'
 // // const app = require('./app');
@@ -52,50 +114,3 @@
 
 // server.listen(port);
 
-
-
-// Import express
-import express from "express";
-
-// Import cors
-import cors from "cors";
-
-// Import connection
-import db from "./config/database.js";
-
-// Import router
-import Router from "./routes/userRoute.js";
- 
-// Init express
-const app = express();
-// use express json
-app.use(express.json());
-
-// const corsOptions = {
-//     origin: process.env.CLIENT_URL,
-//     credentials: true,
-//     'allowedHeaders': ['sessionId', 'Content-Type'],
-//     'exposedHeaders': ['sessionId'],
-//     'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     'preflightContinue': false
-//   }
-//   app.use(cors(corsOptions));
-
-
-// use cors
-app.use(cors());
- 
-// Testing database connection 
-try {
-    await db.authenticate();
-    console.log('Connection has been established successfully.');
-
-} catch (error) {
-    console.error('Unable to connect to the database:', error);
-}
- 
-// use router
-app.use(Router);
- 
-// listen on port
-app.listen((5000), () => console.log('Server running at http://localhost:5000'));

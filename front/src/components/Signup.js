@@ -1,9 +1,10 @@
 
 // import React from 'react';
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import { Link } from "react-router-dom";
+// import { yupResolver } from '@hookform/resolvers/yup';
+// import * as Yup from 'yup';
 import '../styles/Signup.css';
 
 
@@ -11,8 +12,7 @@ function Signup() {
 
 //  // form validation rules 
 //  const validationSchema = Yup.object().shape({
-//     // title: Yup.string()
-//     //     .required('Title is required'),
+//    
 //     firstname: Yup.string()
 //         .required('First Name is required'),
 //     lastname: Yup.string()
@@ -32,6 +32,7 @@ function Signup() {
 //     acceptTerms: Yup.bool()
 //         .oneOf([true], 'Accept Ts & Cs is required')
 // });
+
 // const formOptions = { resolver: yupResolver(validationSchema) };
 
 
@@ -40,27 +41,29 @@ function Signup() {
     const { register, handleSubmit } = useForm();
     // const { errors } = formState;
     const [postId, setPostId] = useState(null);
+
     function onSubmit(data) {
         // display form data on success
         alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
+        console.log(data);
         // return false;
-        // useEffect();
-    }
-
-    useEffect(() => {
-      
+       // useEffect();
+       
         // POST request using fetch inside useEffect React hook
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ register })
+            body: JSON.stringify(data),
         };
-        fetch('https://reqres.in/api/posts', requestOptions)
+        // fetch('https://reqres.in/api/posts', requestOptions)
+        fetch('http://localhost:5000/api/users', requestOptions)
             .then(response => response.json())
             .then(data => setPostId(data.id));
-            // .then(data => console.log(data));
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    }, []);
+         window.location = "/Login";
+    }
+
+   
+      
 
     return (
         <div className="creationCompte" >
@@ -87,7 +90,7 @@ function Signup() {
 
                         <div className="formMail">
                             <label htmlFor="mail">E-mail </label>
-                            <input type="email"  id="mail"  name="mail"  required  placeholder="mail@serveur.com"
+                            <input type="email"  id="mail"  name="mail"  required  placeholder="email@serveur.com"
                             {...register('mail')} //className={`form-control ${errors.mail ? 'is-invalid' : ''}`} 
                             />
                             {/* <div className="invalid-feedback">{errors.mail?.message}</div> */}
@@ -100,16 +103,17 @@ function Signup() {
                             />
                             {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
                             <br /><br />
-                        </div>
-
-                       
+                        </div>                       
 
                         <div className="clearfix">
                             <button type="submit" className="signupbtn" >Se connecter</button>
                         </div>
                     </form> 
+                    <p>Vous avez déjà un compte ? <Link to="/Login"><strong> Se connecter </strong></Link>   </p>
                 
                 </fieldset>
+                                  
+
         </div> 
     ) 
 }

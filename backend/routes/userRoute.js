@@ -1,27 +1,37 @@
 // Import express
 import express from "express";
-// Import Product Controller
+// Import users  Controller
 import { 
     getAllUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser
- } from "../controllers/userControllers.js";
+ } from  "../controllers/userControllers.js";
+
+//  import signup from  "../controllers/authControllers";
  
  // Init express router
 const router = express.Router();
- 
-// Route get all products
-router.get('/users', getAllUsers);
-// Route get product by id
-router.get('/users/:id', getUserById);
-// Route create a new product
-router.post('/users', createUser);
-// Route update product by id
-router.put('/users/:id', updateUser);
-// Route delete product by id
-router.delete('/users/:id', deleteUser);
+
+ //Routes for users (enregistrement ou creation du compte)
+
+// Route get all users
+router.get('/', getAllUsers);
+// Route get user by id
+router.get('/:id', getUserById);
+// Route create a new user
+router.post('/', createUser);
+// Route update user by id
+router.put('/:id', updateUser);
+// Route delete user by id
+router.delete('/:id', deleteUser);
+
+// Route creation de  user 
+// router.post('/signup', signup);
+
+
+
  
 // export router
 export default router;

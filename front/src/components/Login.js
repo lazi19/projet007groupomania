@@ -1,64 +1,79 @@
 
 // import React from 'react'; 
-// // import React, { Component } from 'react'; 
-// // import React, { useState } from 'react';
-
-// import '../styles/Signup.css'
-
-
-// class Login extends Component {
-//     const [mailSignup, setMailSignup] = useState("");
-//     const [passwordSignup, setPasswordSignup] = useState("");
-
-//     constructor() {
-//         super();
-//         this.state = {
-//             mail: useState(""),
-//             password: useState(""), 
-//             items: [],
-//         }
-//     }
+// import React, { Component } from 'react'; 
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import '../styles/Signup.css'
 
 
-//     render() {
-//         return  (
-//             <div className="creationCompte" >
-//                 <fieldset>
-//                     <form id="formSignin" className="formSignin" name="form" onSubmit={fetchSignup}>
-//                         <h2 className="creationCompt">Identifiez vous</h2>
-//                         <hr></hr>
 
-//                         <div className="formMail">
-//                             <label htmlFor="mail">E-mail </label>
-//                             <input type="email"  id="mail"  name="mail"  required  placeholder="mail@serveur.com"
-//                              onChange={(e) => {
-//                                 setMailSignup(e.target.value)
-//                             }} 
-//                             />
-//                         </div>
+    function Login() {  
 
-//                         <div className="formPassword">
-//                             <label htmlFor="password">Mot de passe</label>
-//                             <input type="password"  id="password"  name="password"  required  placeholder="Enter Password "
-//                             onChange={(e) => {
-//                                 setPasswordSignup(e.target.value)
-//                             }}
-//                             /><br /><br />
-//                         </div>                       
+        // const { register, handleSubmit, formState } = useForm(formOptions);
+    const { register, handleSubmit } = useForm();
+    const [postId, setPostId] = useState(null);
 
-//                         <div className="clearfix">
-//                             <button type="submit" className="signupbtn" >Se connecter</button>
-//                         </div>
-//                     </form> 
-                
-//                 </fieldset>
-//             </div>  
-
-//          )
+    function onSubmit(data) {
+        // display form data on success
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
+        console.log(data);
+        // return false;
+       // useEffect();
        
-//     }
-// }
+        // POST request using fetch inside useEffect React hook
 
-// export default Login;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:data,
+        };
+        
+        fetch('http://localhost:5000/users/:id', requestOptions)
+            .then(response => response.json())
+            .then(data => setPostId(data.id));
+            window.location = "/users/:id";
+         
+    }
+    
+        return  (
+            <div className="creationCompte" >
+                <fieldset>
+                    <form id="formSignin" className="formSignin" name="form" onSubmit={handleSubmit(onSubmit)}>
+                        <h2 className="creationCompt">Identifiez-vous</h2>
+                        <hr></hr>  
+                        
+                        <div className="formMail">
+                            <label htmlFor="mail">E-mail </label>
+                            <input type="email"  id="mail"  name="mail"  required  placeholder="email@serveur.com"
+                            {...register('mail')} //className={`form-control ${errors.mail ? 'is-invalid' : ''}`} 
+                            />
+                            {/* <div className="invalid-feedback">{errors.mail?.message}</div> */}
+                        </div>
+
+                        <div className="formPassword">
+                            <label htmlFor="password">Mot de passe</label>
+                            <input type="password"  id="password"  name="password"  required  placeholder="Enter Password "
+                            {...register('password')} //className={`form-control ${errors.password ? 'is-invalid' : ''}`} 
+                            />
+                            {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
+                            <br /><br />
+                        </div>                       
+
+                        <div className="clearfix">
+                            <button type="submit" className="signupbtn" >Se connecter</button>
+                        </div>
+                    </form> 
+                    <p>Vous n'êtes pas encore inscrit ? <Link to="/Signup"><strong> Crées un compte </strong></Link>   </p>
+                
+                
+                </fieldset>
+        </div> 
+        )
+       
+    
+}
+
+export default Login;
 
 

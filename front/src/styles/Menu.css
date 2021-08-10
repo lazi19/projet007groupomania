@@ -11,7 +11,8 @@ nav{
     align-items: center;
     justify-content: space-around;
     /* background: antiquewhite; */
-    border-bottom: solid 2px black;
+    /* border-bottom: solid 3px #FFDFDF; */
+    box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
 
 }
 
@@ -24,11 +25,15 @@ nav{
 
 a{
     text-decoration: none;
-    margin: 10px;  
+    margin: 0 10px;
+    /* display: flex;
+    flex-direction: column; */
+    /* flex: inline block;   */
 }
-h1{
+.h1Menu{
     text-align: center;
     font-size:18px;
+    margin-top: 20px;
 
 }
 /* Fin header */

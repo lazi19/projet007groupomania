@@ -1,0 +1,20 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* footer */
+
+.h1Footer{
+    text-align: center;
+    font-size:18px;
+    padding: 20px;
+    margin-top: 50px;
+    box-shadow: 0 2px 5px 1px rgb(64 60 67 / 16%);
+
+
+}
+/* Fin footer */
+
