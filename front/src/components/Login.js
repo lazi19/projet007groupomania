@@ -18,8 +18,7 @@ import '../styles/Signup.css'
         // display form data on success
         alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
         console.log(data);
-        // return false;
-       // useEffect();
+       
        
         // POST request using fetch inside useEffect React hook
 
@@ -31,8 +30,20 @@ import '../styles/Signup.css'
         
         fetch('http://localhost:5000/users/login', requestOptions)
             .then(response => response.json())
-            .then(data => { setPostId(data.id); window.location = "/users/:id" })
-            .catch(function (err) {alert(err);    });   
+            .then(data => {  setPostId(data.id);
+
+                             window.location = "/users/Profile/:id";
+                             
+                             const dataEtId = {
+                             firstname: register("firstName"),
+                             mail : register("mail"),
+                             id : data.id
+                             }
+                            sessionStorage.setItem("dataEtId", dataEtId) 
+            })
+            .catch(function (err) {alert(err);    }); 
+        
+       
     }
     
         return  (
@@ -40,8 +51,15 @@ import '../styles/Signup.css'
                 <fieldset>
                     <form id="formSignin" className="formSignin" name="form" onSubmit={handleSubmit(onSubmit)}>
                         <h2 className="creationCompt">Identifiez-vous</h2>
-                        <hr></hr>  
-                        
+                        <hr></hr> 
+                        <div className="formPrenom">
+                            <label htmlFor="firstname">Prenom </label>
+                            <input  type="text"  id="firstname"  name="firstname"  required  placeholder="Votre Nnom"
+                            {...register('firstname')} //className={`form-control ${errors.firstname ? 'is-invalid' : ''}`}
+                            />
+                            {/* <div className="invalid-feedback">{errors.firstname?.message}</div> */}
+                        </div> 
+
                         <div className="formMail">
                             <label htmlFor="mail">E-mail </label>
                             <input type="email"  id="mail"  name="mail"  required  placeholder="email@serveur.com"

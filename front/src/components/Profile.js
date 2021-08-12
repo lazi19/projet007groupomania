@@ -1,49 +1,44 @@
-import React, {Component} from 'react'
+// import React, {Component} from 'react'
+
+import { redirect } from "next/dist/next-server/server/api-utils";
 
 // function Profile() {
-    class Profile extends Component  { 
+    // class Profile extends Component  { 
+        function Profile() { 
+            const recupDataEtId = JSON.parse(sessionStorage.getItem( "dataEtId")) 
+            const firstname= "assia";
 
-        state = {
-            id: {}
-        }
-
-        // componentDidMount() {
-        //     // console.log(this.props.match.params.ProfileId);
-        //     const id = this.props.match.params.ProfileId
-            
-        //     const requestOptions = {
-        //         method: 'POST',
-        //         headers: { 'Content-Type': 'application/json' },
-        //         data: payload,
-        //     };
-            
-        //     fetch('http://localhost:5000/users', requestOptions)
-        //         .then(response => {
-        //             //          this.setState({
-        //             //     id: id
-        //             // })
-        //             console.log(response)
-        //         })
-        // }
-
-        
+            const Logout = () => {
+                console.log("logout");
+               redirect<Login />
+            }
 
 
-        render(){
             return (
 
                     <div className="container mt10">
-                        <h1>Profile</h1>
+                        <div>
+                            <h1>Profile</h1>
+                            {/* <h2> Bonjour, <span>{recupDataEtId.firstname}</span></h2> */}
 
-                        <ul className="list-group list-group-flush">
+                            <h2> Bonjour, <span>{firstname}</span></h2>
+
+                            <button onClick={Logout} >Deconnection</button>
+
+                        </div>
+                        <div>
+
+                        </div>
+                        
+                        {/* <ul className="list-group list-group-flush">
                             <li className=" list-group-item">ID: {this.state.id} </li>
                         </ul>
-                        <button>Valider</button>
+                        <button>Valider</button> */}
                         
                     </div>
                 )
 
-        }
+        
     
 }
 

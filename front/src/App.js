@@ -39,10 +39,17 @@ function App() {
                       {/* <Route >
                             <ErrorPage />
                       </Route> */}
-                      <Route  path="/users/:id">
+                      <Route  path="/users/Profile" >
+                            <Profile />
+                      </Route>
+                      
+                      <Route  path="/users/Profile/:id">
                             <Profile />
                       </Route>
                       {/* <Route path="/users/:id" component={Profile} /> */}
+                      
+                    
+
                       <Route  component={ErrorPage} />
 
                   </Switch>
