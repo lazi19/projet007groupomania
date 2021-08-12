@@ -6,10 +6,12 @@ import {
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login
  } from  "../controllers/userControllers.js";
 
 //  import signup from  "../controllers/authControllers";
+//  import login from  "../controllers/authControllers";
  
  // Init express router
 const router = express.Router();
@@ -20,15 +22,16 @@ const router = express.Router();
 router.get('/', getAllUsers);
 // Route get user by id
 router.get('/:id', getUserById);
-// Route create a new user
-router.post('/', createUser);
 // Route update user by id
 router.put('/:id', updateUser);
 // Route delete user by id
 router.delete('/:id', deleteUser);
 
-// Route creation de  user 
+ 
+// Route create a new user
+router.post('/', createUser);   // a la place de signup 
 // router.post('/signup', signup);
+router.post('/login', login);
 
 
 

@@ -26,14 +26,13 @@ import '../styles/Signup.css'
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body:data,
+            body:  JSON.stringify(data),
         };
         
-        fetch('http://localhost:5000/users/:id', requestOptions)
+        fetch('http://localhost:5000/users/login', requestOptions)
             .then(response => response.json())
-            .then(data => setPostId(data.id));
-            window.location = "/users/:id";
-         
+            .then(data => { setPostId(data.id); window.location = "/users/:id" })
+            .catch(function (err) {alert(err);    });   
     }
     
         return  (

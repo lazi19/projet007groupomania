@@ -58,8 +58,13 @@ function Signup() {
         // fetch('https://reqres.in/api/posts', requestOptions)
         fetch('http://localhost:5000/api/users', requestOptions)
             .then(response => response.json())
-            .then(data => setPostId(data.id));
-         window.location = "/Login";
+            .then(data => setPostId(data.id))
+            // window.location = "/Login";
+            
+            .catch(err => {
+                //On traite ici les erreurs éventuellement survenues
+                console.log( err);
+            });
     }
 
    

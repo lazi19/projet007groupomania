@@ -9,18 +9,18 @@ import db from "../config/database.js";
 // init DataTypes
 const { DataTypes } = Sequelize;
  
-// Define schema
+// Define schema User
 const User = db.define('users', {
   // Define attributes
 
-//   annotation_id: {
+//   id: {
 //     type: DataTypes.INTEGER,
 //     autoIncrement: true,
 //     primaryKey: true
 // },
   firstname: {
     type: DataTypes.STRING,
-
+    allowNull: false,
     trim: true //supprime les espaces
   },
   lastname: {
@@ -28,47 +28,23 @@ const User = db.define('users', {
   },
   mail: {
     type: DataTypes.STRING,
-    unique: true
+    unique: true,
+    allowNull: false
 
   },
   password: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   },
-  // bio: {
-  //   type: DataTypes.STRING
-  // },
-  // imageUrl: {
-  //   type: DataTypes.BLOB,
-  //   default: "./uploads/profil/random-user.png"
-  // },
-  // isAdmin: {
-  //   type: DataTypes.BOOLEAN
-  // },
-  
-  // likes: {
-  //   type: DataTypes.STRING
-  // }
-
-},{
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+}
+},
+{
   // Freeze Table Name
   freezeTableName: true,
-  instanceMethods: {
-    generateHash(password) {
-        return bcrypt.hash(password, bcrypt.genSaltSync(8));
-    },
-    validPassword(password) {
-        return bcrypt.compare(password, this.password);
-    }
-}
+  
 });
- 
-
-//play function before save into display: 'block',
-// User.pre("save", async function(next) {
-//   const salt = await bcrypt.genSalt();
-//   this.password = await bcrypt.hash(this.password, salt);
-//   next();
-// });
-
-// Export model Product
 export default User;
