@@ -14,6 +14,7 @@ import db from "./config/database.js";
 // import Router from "./routes/userRoute.js";
 import userRoutes from "./routes/userRoute.js";
 import postMessageRoute from "./routes/postMessageRoute.js";
+import postCommentRoute from "./routes/postCommentRoute.js";
  
 // Init express
 const app = express();
@@ -51,7 +52,9 @@ try {
 // use router
 app.use('/api/users', userRoutes); // Va servir les routes dédiées au users
 
-app.use('/api/posteMessage', postMessageRoute); // Va servir les routes dédiées au poste
+app.use('/api/postMessage', postMessageRoute); // Va servir les routes dédiées au poste
+
+app.use('/api/postCommentaire', postCommentRoute); // Va servir les routes dédiées au poste
 
 
 // app.use(Router);

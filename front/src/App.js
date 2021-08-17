@@ -14,6 +14,9 @@ import {
   Route,
   // Link
 } from "react-router-dom";
+import Commentaire from './components/Commentaire';
+import Publication from './components/Publication';
+import Compte from './components/Compte';
 
 function App() {
 
@@ -42,10 +45,22 @@ function App() {
                       <Route  path="/users/Profile" >
                             <Profile />
                       </Route>
-                      
-                      <Route  path="/users/Profile/:id">
-                            <Profile />
+
+                      <Route  path="/users/Publication" >
+                            <Publication />
                       </Route>
+
+                      <Route  path="/users/Commentaire" >
+                            <Commentaire />
+                      </Route>
+
+                      <Route  path="/users/Compte" >
+                            <Compte />
+                      </Route>
+                      
+                      {/* <Route  path="/users/Profile/:id">
+                            <Profile />
+                      </Route> */}
                       {/* <Route path="/users/:id" component={Profile} /> */}
                       
                     

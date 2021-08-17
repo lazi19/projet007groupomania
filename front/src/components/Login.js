@@ -30,16 +30,17 @@ import '../styles/Signup.css'
         
         fetch('http://localhost:5000/users/login', requestOptions)
             .then(response => response.json())
-            .then(data => {  setPostId(data.id);
+            .then(data => {  setPostId(data.id); 
 
-                             window.location = "/users/Profile/:id";
-                             
                              const dataEtId = {
                              firstname: register("firstName"),
                              mail : register("mail"),
-                             id : data.id
+                             token : data.token,
+                            //  id : postId
+                            userId : data.userId  // id : data.id
                              }
-                            sessionStorage.setItem("dataEtId", dataEtId) 
+                            sessionStorage.setItem("dataUser", JSON.stringify(dataEtId) ); 
+                             window.location = "/users/Profile";
             })
             .catch(function (err) {alert(err);    }); 
         

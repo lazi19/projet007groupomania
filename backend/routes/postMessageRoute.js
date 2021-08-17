@@ -1,38 +1,37 @@
-// Import express
+// Import express 
 import express from "express";
 // Import messages  Controller
-import { 
-    createMessage,
-    getAllMessages,
-    getMessageById,
-    updateMessage,
-    deleteMessage
-    
- } from  "../controllers/postMessageControllers.js";
- 
- // Init express router
- const router = express.Router();
 
-const auth          = require('../middleware/auth');  
+ // Init express router
+const router = express.Router();
 // const postMessageControllers   = require("../controllers/postMessageControllers");
+import postMessageControllers from  "../controllers/postMessageControllers.js";
+// import { 
+//     createMessage, 
+//     getAllMessages, 
+//     getMessageById,
+//     updateMessage,
+//     deleteMessage
+    
+//  } from "../controllers/postMessageControllers.js";
+
+
+
+const auth          = require('../middleware/auth'); 
 const multer        = require("../middleware/multer-config");
 
 // Route create a new message
-router.post("/", auth,  multer, createMessage); 
-// router.post("/",            auth,multer,    createMessage);  // Post - Création des messages avec les images.
-router.get("/", getAllMessages);
-// router.get("/",                             messageCtrl.findAllMessages);
+router.post("/", auth,  multer, postMessageControllers.createMessage); 
 
-router.get("/:id", getMessageById)
-// router.get("/all/:id",                      messageCtrl.findAllMessagesForOne);
+router.get("/", auth, postMessageControllers.getAllMessages);
+
+router.get("/:id", auth, postMessageControllers.getMessageById)
 
 
-router.put('/:id', updateMessage);
-// router.get("/:id",                          messageCtrl.findOneMessage);
+router.put('/:id', auth, multer, postMessageControllers.updateMessage);
 
 
-router.delete('/:id', auth, deleteMessage);
-// router.delete("/",           auth,          messageCtrl.deleteMessage);
+router.delete('/:id', auth, postMessageControllers.deleteMessage);
 
-export default router;
-// module.exports = router;
+// export default router;
+module.exports = router;

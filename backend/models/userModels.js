@@ -1,5 +1,7 @@
 // import sequelize 
-import { Sequelize } from "sequelize";
+// import { DATE, Sequelize } from "sequelize";
+import pkg from 'sequelize';
+const { DATE, Sequelize } = pkg;
 
 // const bcrypt = require('bcrypt');
 import bcrypt from "bcrypt";
@@ -13,11 +15,11 @@ const { DataTypes } = Sequelize;
 const User = db.define('users', {
   // Define attributes
 
-//   id: {
-//     type: DataTypes.INTEGER,
-//     autoIncrement: true,
-//     primaryKey: true
-// },
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+},
   firstname: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -40,6 +42,12 @@ const User = db.define('users', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
+},
+createdAt: {
+  type: DATE
+},
+updatedAt: {
+  type: DATE
 }
 },
 {

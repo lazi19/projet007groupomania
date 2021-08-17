@@ -19,13 +19,13 @@ const router = express.Router();
  //Routes for users (enregistrement ou creation du compte)
 
 // Route get all users
-router.get('/', getAllUsers);
+router.get('/', auth, getAllUsers);
 // Route get user by id
-router.get('/:id', getUserById);
+router.get('/:id', auth,getUserById);
 // Route update user by id
-router.put('/:id', updateUser);
+router.put('/:id', auth, updateUser);
 // Route delete user by id
-router.delete('/:id', deleteUser);
+router.delete('/:id', auth, deleteUser);
 
  
 // Route create a new user
