@@ -41,6 +41,7 @@ import '../styles/Signup.css'
                              }
                             sessionStorage.setItem("dataUser", JSON.stringify(dataEtId) ); 
                              window.location = "/users/Profile";
+                            //  window.location = "/users/Profile/:id={data.id}";
             })
             .catch(function (err) {alert(err);    }); 
         
