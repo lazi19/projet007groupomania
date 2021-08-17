@@ -1,37 +1,32 @@
-// Import express 
+// Import express
 import express from "express";
 // Import messages  Controller
 
- // Init express router
+// Init express router
 const router = express.Router();
 // const postMessageControllers   = require("../controllers/postMessageControllers");
-import postMessageControllers from  "../controllers/postMessageControllers.js";
-// import { 
-//     createMessage, 
-//     getAllMessages, 
-//     getMessageById,
-//     updateMessage,
-//     deleteMessage
-    
-//  } from "../controllers/postMessageControllers.js";
+// import {postMessageControllers} from  "../controllers/postMessageControllers.js";
+import {
+  createMessage,
+  getAllMessages,
+  getMessageById,
+  updateMessage,
+  deleteMessage,
+} from "../controllers/postMessageControllers.js";
 
-
-
-const auth          = require('../middleware/auth'); 
-const multer        = require("../middleware/multer-config");
+const auth = require("../middleware/auth");
+const multer = require("../middleware/multer-config");
 
 // Route create a new message
-router.post("/", auth,  multer, postMessageControllers.createMessage); 
+router.post("/", auth, multer, createMessage);
 
-router.get("/", auth, postMessageControllers.getAllMessages);
+router.get("/", auth, getAllMessages);
 
-router.get("/:id", auth, postMessageControllers.getMessageById)
+router.get("/:id", auth, getMessageById);
 
+router.put("/:id", auth, multer, updateMessage);
 
-router.put('/:id', auth, multer, postMessageControllers.updateMessage);
+router.delete("/:id", auth, deleteMessage);
 
-
-router.delete('/:id', auth, postMessageControllers.deleteMessage);
-
-// export default router;
-module.exports = router;
+// export router
+export default router;
