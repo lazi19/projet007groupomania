@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom'
 
 // class Profile extends Component  {
 function Profile() {
-  const user = JSON.parse(sessionStorage.getItem('user'))
+  const user = JSON.parse(localStorage.getItem('user'))
+  // console.log("user:" + user)
   const [items, setItems] = useState([])
 
   const Logout = () => {
     console.log('logout')
-    localStorage.removeItem('dataUser')
+    localStorage.removeItem('user')
     window.location = '/Login'
   }
 

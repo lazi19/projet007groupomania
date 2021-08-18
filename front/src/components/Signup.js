@@ -41,34 +41,33 @@ function Signup() {
     const { register, handleSubmit } = useForm();
     // const { errors } = formState;
     const [postId, setPostId] = useState(null);
-
+  
     function onSubmit(data) {
         // display form data on success
         alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
         console.log(data);
-        // return false;
-       // useEffect();
        
-        // POST request using fetch inside useEffect React hook
+       
+        // POST request using fetch 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         };
-        // fetch('https://reqres.in/api/posts', requestOptions)
+        
         fetch('http://localhost:5000/api/users', requestOptions)
             .then(response => response.json())
-            .then(data => setPostId(data.id))
-            // window.location = "/Login";
-            
+            .then((data)=> {
+                setPostId(data.id) 
+                window.location = "/Login"
+            })
             .catch(err => {
                 //On traite ici les erreurs éventuellement survenues
                 console.log( err);
             });
-    }
 
-   
-      
+            console.log("setPostId :" + setPostId(data.id) + data )
+    }
 
     return (
         <div className="creationCompte" >
@@ -111,7 +110,7 @@ function Signup() {
                         </div>                       
 
                         <div className="clearfix">
-                            <button type="submit" className="signupbtn" >Se connecter</button>
+                            <button type="submit" className="signupbtn" >S'inscrire</button>
                         </div>
                     </form> 
                     <p>Vous avez déjà un compte ? <Link to="/Login"><strong> Se connecter </strong></Link>   </p>

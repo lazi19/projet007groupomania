@@ -27,10 +27,10 @@ function Login() {
       .then((response) => response.json())
       .then((data) => {
         setPostId(data.id)
-
         console.log(data)
 
-        sessionStorage.setItem('user', JSON.stringify(data))
+        // sessionStorage.setItem('user', JSON.stringify(data))
+        localStorage.setItem('user', JSON.stringify(data))
         window.location = '/users/Profile'
       })
       .catch(function (err) {

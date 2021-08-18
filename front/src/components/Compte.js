@@ -1,9 +1,46 @@
-import React from 'react'
 
+import React from "react";
 
 
 function Compte() {
-    const firstname = "firstnameDynamique";
+    const user = JSON.parse(localStorage.getItem('user'))
+    console.log(user)
+    console.log("id : " + user.id)
+   
+
+    const removeCompte = (id) => {
+      
+        console.log('Le lien a été cliqué.');
+
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {  Authorization: "Bearer " + user.token }
+        }
+
+        fetch( `http://localhost:5000/api/users/${id}` , requestOptions) 
+        .then((response) => {
+            console.log(response);
+           
+            // localStorage.clear()
+            alert('Utilisateur supprimé')
+            // document.location.reload()
+          })
+          .then(() => {
+          })
+          .catch((error) => {
+            console.log(error)
+          }) 
+                // localStorage.clear()
+                // window.location.pathname="/Login"
+                // localStorage.removeItem('user')
+                // window.location = '/Login'
+
+         
+         
+        
+    }
+        
+      
 
      
     return (
@@ -13,12 +50,12 @@ function Compte() {
             <div class="row justify-content-center " >
                 <div className="row maRow d-flex col-10  " >
                      <div className=" col col-8 justify-content-end ">
-                         <h3 className="text-center "> Bienvenue <span>{firstname}{/*{recupDataEtId.firstname}*/} !</span></h3> 
+                         <h3 className="text-center "> Bienvenue <span>{user.firstname} !</span></h3> 
                     </div>
                     <hr/>
 
                     <div>
-                        <p className=" text-center ">Membre depuis le {/*{createdAt}*/}</p>
+                        <p className=" text-center ">Membre depuis le {user.createdAt}</p>
                     </div>
 
                     <div class="card-body mx-auto" style={{ maxWidth: "70%" }} >
@@ -31,7 +68,7 @@ function Compte() {
                         </div> 
 
                         <div class="d-flex justify-content-center ">
-                            <button type="button" class="btn btn-danger m-3 font-weight-bold ">SUPPRIMER VOTRE COMPTE</button>
+                            <button type="button" class="btn btn-danger m-3 font-weight-bold " onClick={() => removeCompte(user.id)} >SUPPRIMER VOTRE COMPTE</button>
                             <button type="button" class="btn btn-secondary m-3 font-weight-bold "  >Annuler</button>
 
                         </div>

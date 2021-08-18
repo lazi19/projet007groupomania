@@ -18,11 +18,20 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
   };
+  // Message.init({
+  //   userId: DataTypes.STRING,
+  //   content: DataTypes.STRING,
+  //   likes: DataTypes.STRING,
+  //   attachment: DataTypes.STRING
+  // }, {
+  //   sequelize,
+  //   modelName: 'Message',
+  // });
   Message.init({
+    message: DataTypes.STRING,
+    messageUrl:  DataTypes.STRING, 
     userId: DataTypes.STRING,
-    content: DataTypes.STRING,
-    likes: DataTypes.STRING,
-    attachment: DataTypes.STRING
+    
   }, {
     sequelize,
     modelName: 'Message',
