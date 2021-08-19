@@ -1,43 +1,72 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+// import TextField from "@material-ui/core/TextField";
+import axios from 'axios';
 
 function Publication() {
-  const recupDataEtId = JSON.parse(sessionStorage.getItem( "dataEtId"))
 
-    const [file, setFile] = useState();
+  const recupData = JSON.parse(localStorage.getItem( "user"))
+  const token = recupData.token;
+    
     const [message, setMessage] = useState();
+    const [file, setFile] = useState();
 
     const handleMessagePicture = (e) => {
-        e.preventDefault();
 
+         e.preventDefault();
 
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:  JSON.stringify(file, message),
-      };
+         const data = new FormData();
+
+         data.append("message", message);
+         data.append("file", file);
+        // const publicationMessageImageToken = {message, file, recupToken }
+       
+        console.log( file);
+        console.log("message : " + message);
+        console.log(  data);
+
+      //   const requestOptions = {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json' },
+        
+      //     body:  JSON.stringify({
+      //                 message,
+      //                 file,
+      //                 token
+      //     }),
+      // };
       
-      fetch('http://localhost:5000/api/postMessage', requestOptions)
-          .then(response => response.json())
-          .then(data => { console.log(data);
-             window.location = "/users/Profile";
-          })
-          .catch((err) => console.log(err))
+      // fetch('http://localhost:5000/api/messages', requestOptions)
+      //     .then(response => response.json())
+      //     .then(data => { console.log(data);
+      //       //  window.location = "/users/Profile";
+      //     })
+      //     .catch((err) => console.log(err))
+        
+   axios
+    .post("http://localhost:5000/api/messages", data, {
+      headers: { Authorization: "Bearer " + token },
+    })
+    .then((res) => console.log(res), alert("Message crée"))
+    .then(() => {document.location.reload()})
+    .catch((err) => console.log(err));
+
+      
 
     }
+
+
   return (
    
     <>
       {/* Un seul bloc pour le contenu creation message  */}
-      <section onSubmit={handleMessagePicture} class="row card bg-light m-5 p-3">
+      <section class="row card bg-light m-5 p-3">
         <form 
         // enctype="multipart/form-data"
         >
           <div class="header p-1">
             <h2 class="btn btn-dark">
-             {/* { recupDataEtId.firstname }  */}
-             firstname vous allez créer une nouvelle publication
+              { recupData.firstname }  vous allez créer une nouvelle publication
             </h2>
           </div>
           <div class="row">
@@ -53,10 +82,14 @@ function Publication() {
                 id="newMessage"
                 name="message"
                 rows="8"
-                placeholder="Saisissez votre message. (1500 caractères max)"
+                placeholder="Saisissez votre message. "
                 required
-                onChage={(e) => setMessage(e.target.message[0])}
-                value={message}
+                // onChage={(e) => setMessage(e.target.message[0])}
+                // value={message.value}
+                onChange={(event) => {
+                  const { value } = event.target;
+                  setMessage(value);
+                }}
               />
         
             </div>
@@ -78,9 +111,14 @@ function Publication() {
                   class="form-control-file"
                   id="file"
                   accept=".jpg, .jpeg, .gif, .png"
-                  onChange={(e) => setFile(e.target.file)}
                   // onChange={(e) => setFile(e.target.file[0])}
-                  value={file}
+                  // onChange={(e) => setFile(e.target.file[0])}
+                  // value={file.value}
+
+                  onChange={(event) => {
+                    const file = event.target.files[0];
+                    setFile(file);
+                  }}
                 /> 
               </div>
             </div>
@@ -88,7 +126,7 @@ function Publication() {
 
           <div class="  m-2 p-2 ">
                 <div>
-                  <button type="submit" class="btn btn-dark  m-2 p-2">
+                  <button type="submit" class="btn btn-dark  m-2 p-2"  onClick={handleMessagePicture}  >
                     Valider
                   </button>
 

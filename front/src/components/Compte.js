@@ -6,7 +6,7 @@ function Compte() {
     const user = JSON.parse(localStorage.getItem('user'))
     console.log(user)
     console.log("id : " + user.id)
-   
+   const id = user.id
 
     const removeCompte = (id) => {
       
@@ -23,10 +23,9 @@ function Compte() {
            
             // localStorage.clear()
             alert('Utilisateur supprimé')
-            // document.location.reload()
+            // window.location = '/login'
           })
-          .then(() => {
-          })
+         
           .catch((error) => {
             console.log(error)
           }) 
@@ -34,15 +33,7 @@ function Compte() {
                 // window.location.pathname="/Login"
                 // localStorage.removeItem('user')
                 // window.location = '/Login'
-
-         
-         
-        
     }
-        
-      
-
-     
     return (
         <main class="container" >
 

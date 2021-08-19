@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState,  useEffect } from 'react'
 
 import '../styles/Profile.css'
-import img from '../images/IMG_0141.JPG'
 import { Link } from 'react-router-dom'
 
-// class Profile extends Component  {
+
+
 function Profile() {
   const user = JSON.parse(localStorage.getItem('user'))
-  // console.log("user:" + user)
-  const [items, setItems] = useState([])
+  console.log("user:" + user.id)
+  const [publications, setPublications] = useState([])
 
   const Logout = () => {
     console.log('logout')
@@ -16,25 +16,44 @@ function Profile() {
     window.location = '/Login'
   }
 
-  // fetch('http://localhost:5000/api/postMessage')
-  // .then(response => response.json())
-  // .then(getMessages(result) => {
 
-  //     console.log(result);
-  // console.log(result.id_message);
-  // sessionStorage.setItem("id_message", JSON.stringify(result.id_message) );
-  //     setItems(result.items);
-  //     console.log(setItems);
-  //
+  useEffect(() => {
 
-  // })
-  // .catch((err) => console.log(err))
+      fetch('http://localhost:5000/api/messages')
+      .then(response => response.json())
+      .then((result) => {
+        setPublications(result);
+        // console.log("setPublications :", setPublications)
+          console.log(result); 
+          localStorage.setItem("dataMessage", JSON.stringify(result) );
+          // const userId = JSON.parse(localStorage.getItem('dataMessage.userId'))
+          const dataMessage = JSON.parse(localStorage.getItem('dataMessage'))
+          const allUserId = dataMessage.map((a) => a.userId)
+          console.log(allUserId); 
+      })
+      .catch((err) => console.log(err))
+}, []);
+
+                      
+//  if ( user.id===1//publications.userId = user.id 
+//   ){
+ 
+//   var btnDesabled = document.getElementById('maBtn').disabled;
+//  } else {
+//     // button = ;
+//   }
+
+
+
+
+
 
   return (
     <main className="container mt10">
       <h2>Profile</h2>
       {/* <!-- bloc utilisateur --> */}
       <section class="container ">
+        
         {/* ******* bloc bienvenu******* */}
         <div className="row maRow d-flex   ">
           <div className=" col col-8 justify-content-end ">
@@ -51,7 +70,7 @@ function Profile() {
           </div>
         </div>
 
-        {/* ******* bloc des boutons comp publication commenter******* */}
+        {/* ******* bloc des boutons  publication commenter******* */}
         <div class="row maRow">
           <Link to="/users/Compte" class="btn maBtn">
             Compte
@@ -67,18 +86,16 @@ function Profile() {
         <div>
           <span>
             {' '}
-            Posté par {user.firstname}
-            {/*{recupDataEtId.firstname}*/} le 13/08/2021 {/*{createdAt}*/}
+            Posté par {user.firstname} le  {user.createdAt}
           </span>
         </div>
 
         <div id="cardMessageImage" class="card">
-          {items.map((item) => (
-            <div key={item.id}>
+          {publications.map((publication) => (
+            <div key={publication.id}>
               <div class="img">
                 <img
-                  src={img}
-                  // src={items.image}
+                  src={publications.image}
                   id="image"
                   alt="mon_image"
                   width="400"
@@ -89,23 +106,28 @@ function Profile() {
 
               <div card-body>
                 <p class="p-3" id="message">
-                  mon message
-                  {/* {items.message} */}
+                  
+                  {publication.message}
                 </p>
               </div>
+              
+              <hr></hr>
+              <div>
+                <button id="maBtn" class="maBtn" 
+                // disabled={!`${key=publication.id}`}
+                >
+                  supprimer Message<i class="bi bi-trash"></i>
+                </button>
+                <Link to="/users/Commentaire" class="btn maBtn">
+                  Commenter
+                </Link>
+              </div>
+              <hr></hr>
             </div>
           ))}
-          ;
+          
         </div>
 
-        <div>
-          <button class="maBtn">
-            supprimer Message<i class="bi bi-trash"></i>
-          </button>
-          <Link to="/users/Commentaire" class="btn maBtn">
-            Commenter
-          </Link>
-        </div>
       </section>
 
       {/* <!-- bloc avec tous le(s) commentaire(s) --> */}

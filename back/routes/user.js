@@ -17,7 +17,7 @@ router.get("/:id", auth, userCtrl.getUserById);
 // Route update user by id
 router.put("/:id", auth, userCtrl.updateUser);
 // Route delete user by id
-router.delete("/id", auth, userCtrl.deleteUser);
+router.delete("/:id", auth, userCtrl.deleteUser);
 
 
 
@@ -31,14 +31,5 @@ router.post("/", userCtrl.createUser); // a la place de signup
 
 //Route connection du user existant
 router.post("/login", userCtrl.login);
-
-
-
-
-
-
-
-
-
 
 module.exports = router;
