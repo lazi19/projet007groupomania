@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import TextField from "@material-ui/core/TextField";
-import axios from 'axios';
+// import axios from 'axios';
+
 
 function Publication() {
 
   const recupData = JSON.parse(localStorage.getItem( "user"))
-  const token = recupData.token;
-    
+  // const token = recupData.token;
+  console.log(recupData)
+   const userId =  recupData.id;
+  
+   console.log("userId : " + userId)
     const [message, setMessage] = useState();
     const [file, setFile] = useState();
 
@@ -15,69 +19,89 @@ function Publication() {
 
          e.preventDefault();
 
-         const data = new FormData();
+        //  const data = new FormData();
 
-         data.append("message", message);
-         data.append("file", file);
+        //  data.append("message", message);
+        //  data.append("file", file);
+        //  data.append("userId", userId);
+        //  data.append("firstname", firstname);
         // const publicationMessageImageToken = {message, file, recupToken }
        
         console.log( file);
         console.log("message : " + message);
-        console.log(  data);
+        // console.log(data);
 
-      //   const requestOptions = {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
+//Publication nouveau du message
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
         
-      //     body:  JSON.stringify({
-      //                 message,
-      //                 file,
-      //                 token
-      //     }),
-      // };
+          body:  JSON.stringify({
+                      message,
+                      file,
+                      userId
+                     
+          }),
+      };
       
-      // fetch('http://localhost:5000/api/messages', requestOptions)
-      //     .then(response => response.json())
-      //     .then(data => { console.log(data);
-      //       //  window.location = "/users/Profile";
-      //     })
-      //     .catch((err) => console.log(err))
-        
-   axios
-    .post("http://localhost:5000/api/messages", data, {
-      headers: { Authorization: "Bearer " + token },
-    })
-    .then((res) => console.log(res), alert("Message crée"))
-    .then(() => {document.location.reload()})
-    .catch((err) => console.log(err));
-
-      
-
+      fetch('http://localhost:5000/api/messages', requestOptions)
+          .then(response => response.json())
+          .then(data => { console.log(data);
+            //  window.location = `/users/Profile/${id}`;
+          })
+          .catch((err) => console.log(err))
     }
+
+    
+
+    
+//modification message existant
+
+// const modifMessagePicture = (id) => {
+ 
+//   console.log('Le lien a été cliqué.');
+//   const requestOptions = {
+//       method: 'update',
+//       headers: {  Authorization: "Bearer " + recupData.token }
+//   }
+
+//   fetch( `http://localhost:5000/api/messages/${id}`, requestOptions) 
+//   .then((response) => {
+//       console.log(response);
+     
+//       // localStorage.clear()
+//       alert('message modifier')
+//       // window.location = '/login'
+//     })
+   
+//     .catch((error) => {
+//       console.log(error)
+//     }) 
+// }
 
 
   return (
    
     <>
       {/* Un seul bloc pour le contenu creation message  */}
-      <section class="row card bg-light m-5 p-3">
+      <section className="row card bg-light m-5 p-3">
         <form 
         // enctype="multipart/form-data"
         >
-          <div class="header p-1">
-            <h2 class="btn btn-dark">
+          <div className="header p-1">
+            <h2 className="btn btn-dark">
               { recupData.firstname }  vous allez créer une nouvelle publication
             </h2>
           </div>
-          <div class="row">
+          <div className="row">
             <div className="col-12 justify-content-center form-group">
-              <label for="newMessage">
+              <label htmlFor="newMessage">
                 Donnez des détails sur votre publication.
               </label>
               {' '}
               
               <textarea
-                class="form-control"
+                className="form-control"
                 v-model="newMessage"
                 id="newMessage"
                 name="message"
@@ -93,23 +117,24 @@ function Publication() {
               />
         
             </div>
-            <div class="col-12 justify-content-center text-center">
-              {/* <img alt="newImage" class="w-50 rounded" /> */}
-              <p class="text-center">
+            <div className="col-12 justify-content-center text-center">
+              {/* <img alt="newImage" className="w-50 rounded" /> */}
+              <p className="text-center">
                 {' '}
                 un aperçu de votre post apparaîtra ici. Formats acceptés: jpg,
                 jpeg, png et gif.
               </p>
             </div>
-            <div class="col-12 justify-content-center">
-              <div class="form-group justify-content-center">
-                <label for="File"> Choisir une nouvelle photo  </label> {' '}
+            <div className="col-12 justify-content-center">
+              <div className="form-group justify-content-center">
+                <label htmlFor="File"> Choisir une nouvelle photo  </label> {' '}
                 <input
                   type="file"
                 //   ref="file"
                   name="file"
-                  class="form-control-file"
+                  className="form-control-file"
                   id="file"
+                  multiple={false}
                   accept=".jpg, .jpeg, .gif, .png"
                   // onChange={(e) => setFile(e.target.file[0])}
                   // onChange={(e) => setFile(e.target.file[0])}
@@ -124,14 +149,20 @@ function Publication() {
             </div>
           </div>
 
-          <div class="  m-2 p-2 ">
+          <div className="  m-2 p-2 ">
                 <div>
-                  <button type="submit" class="btn btn-dark  m-2 p-2"  onClick={handleMessagePicture}  >
+                  <button type="submit" className="btn btn-dark  m-2 p-2"  onClick={handleMessagePicture}  >
                     Valider
                   </button>
+                 
+                  {/* <button type="submit" className="btn btn-dark  m-2 p-2"  
+                  onClick={modifMessagePicture}  
+                  >
+                    Modifier message
+                  </button> */}
 
                   <Link to="/users/Profile">
-                    <div class="btn btn-danger   m-2 p-2">
+                    <div className="btn btn-danger   m-2 p-2">
                       {' '}
                       Annuler/Retour
                     </div>
@@ -140,7 +171,7 @@ function Publication() {
                 </div>
                
           </div>
-          <div v-show="isInvalid" class="invalidBox m-2" key="invalid">
+          <div v-show="isInvalid" className="invalidBox m-2" key="invalid">
             <p>
               Vous ne pouvez pas envoyer de post sans contenu (vous devez
               inclure texte et image). Votre message doit faire moins de 1500

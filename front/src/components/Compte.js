@@ -6,7 +6,7 @@ function Compte() {
     const user = JSON.parse(localStorage.getItem('user'))
     console.log(user)
     console.log("id : " + user.id)
-   const id = user.id
+  
 
     const removeCompte = (id) => {
       
@@ -17,13 +17,13 @@ function Compte() {
             headers: {  Authorization: "Bearer " + user.token }
         }
 
-        fetch( `http://localhost:5000/api/users/${id}` , requestOptions) 
+        fetch( `http://localhost:5000/api/users/${id}`, requestOptions) 
         .then((response) => {
             console.log(response);
            
-            // localStorage.clear()
+            localStorage.clear()
             alert('Utilisateur supprimé')
-            // window.location = '/login'
+            window.location = '/login'
           })
          
           .catch((error) => {
@@ -33,6 +33,10 @@ function Compte() {
                 // window.location.pathname="/Login"
                 // localStorage.removeItem('user')
                 // window.location = '/Login'
+    }
+
+    const handleClick = () =>  {
+        window.location = '/users/Profile' 
     }
     return (
         <main class="container" >
@@ -60,7 +64,7 @@ function Compte() {
 
                         <div class="d-flex justify-content-center ">
                             <button type="button" class="btn btn-danger m-3 font-weight-bold " onClick={() => removeCompte(user.id)} >SUPPRIMER VOTRE COMPTE</button>
-                            <button type="button" class="btn btn-secondary m-3 font-weight-bold "  >Annuler</button>
+                            <button type="button" class="btn btn-secondary m-3 font-weight-bold "  onClick={handleClick} >Annuler</button>
 
                         </div>
                         

@@ -6,14 +6,28 @@ const {Comment} = require ("../models/index.js")
 // import {User} from "../models/index.js";
 const {User} = require ("../models/index.js")
 const { Message } = require("../models/index"); // Importation du modèle User //
-
+const jwt = require("jsonwebtoken"); // Sécurisation de la connection grâce à des tokens uniques //
 
 const fs = require("fs");
+
+// const decodeId = (authorization) => {
+//   const token = authorization.split(" ")[1];
+//   const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+//   return {
+//       id: decodedToken.userId,
+//   };
+// };
 
 // Routes CRUD : Create, Read, Update, Delete.
 
 exports.createMessage = (req, res, next) => {
-  console.log(req.body);
+
+  console.log(" req.body :" + req.body);
+  console.log(" req.body.message :" + req.body.message);
+  // const messageObject = JSON.parse(req.body);
+  // console.log("messageObject :" + messageObject.message)
+  // const user = decodeId(req.headers.authorization);
+
   // console.log("ligne 15 req.body" + req.body.messageUrl);
   // const messageObject = JSON.parse(req.body.token);
   // delete messageObject.token;
@@ -26,9 +40,11 @@ exports.createMessage = (req, res, next) => {
     }`;
   }
   const message = new Message({
-    UserId: req.body.UserId,
+    // UserId: req.headers.authorization[1],
+    // UserId: req.body.UserId,
     message: req.body.message,
     messageUrl: imagePost,
+    userId:  req.body.userId
   });
   console.log(message);
   message
@@ -68,20 +84,31 @@ exports.updateMessage = (req, res, next) => {
 };
 
 exports.deleteMessage = (req, res, next) => {
-  Message.findOne({ id: req.params.id })
-    .then((message) => {
-      const filename = message.imageUrl.split("/images/")[1];
-      fs.unlink(`images/${filename}`, () => {
-        Message.deleteOne({ _id: req.params.id })
-          .then(() => res.status(200).json({ message: "Message supprimé !" }))
-          .catch((error) => res.status(400).json({ error }));
-      });
-    })
-    .catch((error) => res.status(500).json({ error }));
+
+  Message.destroy({ where: { id: req.params.id } })
+  .then(() =>
+  res
+    .status(200)
+    .json({ message: "Message supprimé" })
+)
+.catch((error) => res.status(500).json({ error }));
+
+  
+  
+    // .then((message) => {
+    //   const filename = message.imageUrl.split("/images/")[1];
+    //   fs.unlink(`images/${filename}`, () => {
+    //     Message.deleteOne({ id: req.params.id })
+    //       .then(() => res.status(200).json({ message: "Message supprimé !" }))
+    //       .catch((error) => res.status(400).json({ error }));
+    //   });
+    // })
+    // .catch((error) => res.status(500).json({ error }));
 };
 
 exports.getAllMessages = (req, res, next) => {
   Message.findAll()
+
     .then((messages) => res.status(200).json(messages))
     .catch((error) => res.status(400).json({ error }));
 };

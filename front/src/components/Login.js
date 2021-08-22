@@ -31,7 +31,8 @@ function Login() {
 
         // sessionStorage.setItem('user', JSON.stringify(data))
         localStorage.setItem('user', JSON.stringify(data))
-        window.location = '/users/Profile'
+        window.location = `/users/Profile/${data.id}`
+      
       })
       .catch(function (err) {
         alert(err)
