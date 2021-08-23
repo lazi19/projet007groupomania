@@ -19,6 +19,16 @@ module.exports = {
         },
         onDelete: "CASCADE",
       },
+      // userFirstname: {
+      //   allowNull: false,
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: "Users",
+      //     key: "firstname",
+      //     as: "userFirstname",
+      //   },
+      //   onDelete: "CASCADE",
+      // },
       message : {
         allowNull: false,
         type: Sequelize.STRING,

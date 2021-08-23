@@ -1,10 +1,14 @@
-// import React, { Component } from 'react'
+import React from 'react'
 import './App.css';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import Commentaire from './components/Commentaire';
+import Publication from './components/Publication';
+import Compte from './components/Compte';
+import Administrateur from './components/Administrateur';
 import ErrorPage from './components/ErrorPage';
 
 
@@ -14,9 +18,7 @@ import {
   Route,
   // Link
 } from "react-router-dom";
-import Commentaire from './components/Commentaire';
-import Publication from './components/Publication';
-import Compte from './components/Compte';
+
 
 function App() {
 
@@ -50,9 +52,14 @@ function App() {
                             <Publication />
                       </Route>
 
-                      <Route  path="/users/Commentaire" >
+                       <Route  path="/users/Commentaire" >
                             <Commentaire />
-                      </Route>
+                      </Route> 
+
+                       {/* <Route name = "commentaire" path="/users/Commentaire/:id" >
+                            <Commentaire />
+                      </Route>  */}
+
 
                       <Route  path="/users/Compte" >
                             <Compte />
@@ -63,7 +70,9 @@ function App() {
                       </Route> */}
                       {/* <Route path="/users/:id" component={Profile} /> */}
                       
-                    
+                      <Route  path="/users/Administrateur" >
+                            <Administrateur />
+                      </Route>
 
                       <Route  component={ErrorPage} />
 

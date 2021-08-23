@@ -1,89 +1,96 @@
-import React, { useState,  useEffect } from 'react'
-
+import React, { useState, useEffect } from 'react'
+// import {  useLocation } from "react-router-dom";
 import '../styles/Profile.css'
 import { Link } from 'react-router-dom'
 
-
-
 function Profile() {
-  
-  const user = JSON.parse(localStorage.getItem('user')) 
-  console.log("user:" + user.id)
+ 
+  const user = JSON.parse(localStorage.getItem('user'))
+  console.log('user:' + user.id)
+  console.log('firstname :' + user.firstname)
   const [publications, setPublications] = useState([])
 
-  console.log("afficher publications : " + publications)
-  console.log("afficher setPublications : " + setPublications)
-  
-// se deconnecter
+  // console.log('afficher publications : ' + publications)
+  // console.log('afficher setPublications : ' + setPublications)
+
+  // se deconnecter
   const Logout = () => {
     console.log('logout')
     localStorage.removeItem('user')
     window.location = '/Login'
   }
 
-// afficher tous les messages
+  // afficher tous les messages
   useEffect(() => {
-
-      fetch('http://localhost:5000/api/messages')
-      .then(response => response.json())
+    fetch('http://localhost:5000/api/messages')
+      .then((response) => response.json())
       .then((result) => {
-        setPublications(result);
+        setPublications(result)
         // console.log("setPublications :", setPublications)
-          console.log(result); 
-          localStorage.setItem("dataMessage", JSON.stringify(result) );
-          const userId = JSON.parse(localStorage.getItem('dataMessage.userId'))
-          
-          const dataMessage = JSON.parse(localStorage.getItem('dataMessage'))
-         
-          console.log("dataMessage.userId la cle de l'attachement  du message avec son user : " + userId)
-          console.log("le id du message"  + publications.id)
-          console.log("le id du user  :" + user.id); 
-         
-          // if ( publications.userId !== user.id ){ 
-          //     let buttonSupprime= document.querySelector('.maBtn') ;
-          //     buttonSupprime.disabled = false;
-          //  } 
+        console.log(result)
+        localStorage.setItem('dataMessage', JSON.stringify(result))
+        // const userId = JSON.parse(localStorage.getItem('dataMessage.userId'))
+        
+        // const dataMessage = JSON.parse(localStorage.getItem('dataMessage'))
 
-          
-  //   if ( publications.userId !== user.id ){ 
-  //     onclick=document.querySelector('.maBtn').disabled=false ; 
-  // }
+        // console.log("dataMessage.userId la cle de l'attachement  du message avec son user : " + userId)
+        // console.log('le id du message : ' + publications.map((id) => id[0] )
+        console.log('le id du user  :' + user.id)
 
+        // if ( publications.userId !== user.id ){
+        //     let buttonSupprime= document.querySelector('.maBtn') ;
+        //     buttonSupprime.disabled = false;
+        //  }
+
+        //   if ( publications.userId !== user.id ){
+        //     onclick=document.querySelector('.maBtn').disabled=false ;
+        // }
       })
       .catch((err) => console.log(err))
-  }, [user.id]);  
+  }, [user.id])
+ 
+  // supprimer message
+  const removedMessage = (id) => {
+    console.log('Le lien a été cliqué.')
+    if (  publications.userId !== user.id )
+    {document.getElementById('maBtn').style.display = "hidden" }
 
-
-// supprimer message
-const removedMessage = (id) => {
-  console.log('Le lien a été cliqué.');
-// if ({ id: params.id });  
-  const requestOptions = {
+    // if ({ id = params.id });
+      //  :   document.getElementById('maBtn').hidden=false)
+      // {
+    // document.getElementById('maBtn').hidden
+    // }
+    
+    const requestOptions = {
       method: 'DELETE',
-      headers: {  Authorization: "Bearer " + user.token }
+      headers: { Authorization: 'Bearer ' + user.token },
+    }
+
+    fetch(`http://localhost:5000/api/messages/${id}`, requestOptions)
+      .then((response) => {
+        console.log(response)
+       
+        // localStorage.clear()
+        alert('message supprimé')
+        // window.location = '/login'
+      })
+
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
-  fetch( `http://localhost:5000/api/messages/${id}`, requestOptions) 
-  .then((response) => {
-      console.log(response);
-     
-      // localStorage.clear()
-      alert('message supprimé')
-      // window.location = '/login'
-  })
-   
-    .catch((error) => {
-      console.log(error)
-    })
+  // commenter message
 
-}
+  // const commenterMessage = (id) => {
+  //   window.location = `/users/Commentaire/${id}`
+  // }
 
   return (
     <main className="container mt10">
       <h2>Profile</h2>
       {/* <!-- bloc utilisateur --> */}
       <section className="container ">
-        
         {/* ******* bloc bienvenu******* */}
         <div className="row maRow d-flex   ">
           <div className=" col col-8 justify-content-end ">
@@ -105,7 +112,7 @@ const removedMessage = (id) => {
           <Link to={`/users/Compte/${user.id}`} className="btn maBtn">
             Compte
           </Link>
-          <Link to={`/users/Publication/${user.id} `}className="btn maBtn">
+          <Link to={`/users/Publication/${user.id} `} className="btn maBtn">
             Publication
           </Link>
         </div>
@@ -113,17 +120,21 @@ const removedMessage = (id) => {
 
       {/* <!-- bloc avec tous le(s) message(s) --> */}
       <section className=" maRow p-3">
-      <div>
-            <span>
-              {' '}
-              Posté par {` ${user.firstname}`} le  {user.createdAt}
-            </span>
+        <div>
+          <span>
+            {' '}
+            Posté par {` ${user.firstname}`} le {user.createdAt}
+         
+          </span>
         </div>
 
         <div id="cardMessageImage" className="card">
-        
           {publications.map((publication) => (
             <div key={publication.id}>
+              <span>
+                {' '}
+                Posté par {` ${publication.userId}`} le {publication.createdAt}
+              </span>
               <div className="img">
                 <img
                   src={publications.image}
@@ -137,60 +148,84 @@ const removedMessage = (id) => {
 
               <div card-body>
                 <p className="p-3" id="message">
-                  
                   {publication.message}
                 </p>
               </div>
-              
-              <hr></hr>
+
+              {/* <hr></hr> */}
               <div>
-                <button id="maBtn" className="maBtn"
-                 onClick={() => removedMessage(publication.id)}
-                //  disabled={ publication.id !== user.id }       
+                <button
+                  id="maBtn"
+                  className="maBtn"
+                  onClick={() => removedMessage(publication.id)}
+                  disabled={ publication.userId !== user.id ? true : false }
+                
                 >
                   supprimer Message<i className="bi bi-trash"></i>
                 </button>
 
-                <Link to="/users/Commentaire" className="btn maBtn">
+                {/* <button
+                  id="maBtn"
+                  className="maBtn"
+                  onClick={commenterMessage(`${publication.id}`)} 
+                  // onClick={window.location = `/users/Commentaire/${publication.id}`}
+                >
+                  Commenter<i className="bi bi-trash"></i>
+                </button> */}
+                {/* <Link to="/users/Commentaire" className="btn maBtn" >
                   Commenter
-                </Link>
+                </Link> */}
+                
+                {/* <Link to="commentaire" params ={{ id : ` ${publication.id} `}} className="btn maBtn" >
+                  Commenter
+                </Link> */}
               </div>
               <hr></hr>
+                 {/* <!-- bloc avec tous le(s) commentaire(s) --> */}
+
+            {/* <section className=" maRow p-3"> */}
+
+              {/* <div>
+                <p> Soyez le premier à commenter cette publication </p>
+              </div> */}
+
+              {/* <div>
+                <span>
+                  Commentaire rédigé par {user.firstname} le date dynamique 
+                  {recupDataEtId.firstname} {/*{createdAt}
+                </span>
+
+              </div> 
+              */}
+
+              {/* <div card-body>
+                <p className="p-3">mon commentaire{ commentaire }</p>
+              </div>
+               */}
+
+              {/* <div>
+                <button className="maBtn">
+                  supprimer commentaire<i className="bi bi-trash"></i>
+                </button>
+                <button className="maBtn">
+                  Modifier commentaire<i className="bi bi-trash"></i>
+                </button>
+              </div> */}
+            {/* </section> */}
+            {/* <hr></hr> */}
+
+
+
+
+
+
             </div>
           ))}
-          
         </div>
 
       </section>
 
-      {/* <!-- bloc avec tous le(s) commentaire(s) --> */}
-
-      <section className=" maRow p-3">
-        <div>
-          <p> Soyez le premier à commenter cette publication </p>
-        </div>
-
-        <div>
-          <span>
-            Commentaire rédigé par {user.firstname}
-            {/*{recupDataEtId.firstname}*/} le 13/08/2021 {/*{createdAt}*/}
-          </span>
-        </div>
-
-        <div card-body>
-          <p className="p-3">mon commentaire{/*{ commentaire }*/}</p>
-        </div>
-
-        <div>
-          <button className="maBtn">
-            supprimer commentaire<i className="bi bi-trash"></i>
-          </button>
-          <button className="maBtn">
-            Modifier commentaire<i className="bi bi-trash"></i>
-          </button>
-          
-        </div>
-      </section>
+     
     </main>
   )
 }

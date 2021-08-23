@@ -1,10 +1,10 @@
 // Import express
-
 const express = require ("express")
-// Import messages  Controller
 
 // Init express router
 const router = express.Router();
+
+// Import messages  Controller
 const messageCtrl   = require("../controllers/message");
 
 const auth = require("../middleware/auth");

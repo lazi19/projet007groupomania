@@ -47,6 +47,7 @@ function Publication() {
       fetch('http://localhost:5000/api/messages', requestOptions)
           .then(response => response.json())
           .then(data => { console.log(data);
+            
             //  window.location = `/users/Profile/${id}`;
           })
           .catch((err) => console.log(err))
@@ -130,10 +131,10 @@ function Publication() {
                 <label htmlFor="File"> Choisir une nouvelle photo  </label> {' '}
                 <input
                   type="file"
-                //   ref="file"
+                  useRef="file"
                   name="file"
                   className="form-control-file"
-                  id="file"
+                  id="file"                 
                   multiple={false}
                   accept=".jpg, .jpeg, .gif, .png"
                   // onChange={(e) => setFile(e.target.file[0])}
@@ -172,9 +173,9 @@ function Publication() {
                
           </div>
           <div v-show="isInvalid" className="invalidBox m-2" key="invalid">
-            <p>
+            <p id=''>
               Vous ne pouvez pas envoyer de post sans contenu (vous devez
-              inclure texte et image). Votre message doit faire moins de 1500
+              inclure texte ou image). Votre message doit faire moins de 1500
               caractères.
             </p>
           </div>

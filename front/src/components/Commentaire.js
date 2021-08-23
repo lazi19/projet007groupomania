@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 function Commentaire() {
-    const recupDataEtId = JSON.parse(sessionStorage.getItem( "dataEtId"))
-
+    // const user = JSON.parse(sessionStorage.getItem( "user"))
+    const recupData = JSON.parse(localStorage.getItem( "user"))
+    const userMessage = 18
     
     const [commentaire, setCommentaire] = useState();
 
-
+// poster un commentaire
     const handleCommentaire = (e) => {
         e.preventDefault();
 
@@ -15,13 +16,19 @@ function Commentaire() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body:  JSON.stringify(commentaire),
+            body:  JSON.stringify({
+              commentaire,
+              userMessage
+              
+             
+            }),
         };
+      
 
-        fetch('http://localhost:5000/api/postCommentaire', requestOptions)
+        fetch('http://localhost:5000/api/commentaires', requestOptions)
         .then(response => response.json())
         .then(data => { console.log(data);
-           window.location = "/users/Profile";
+          //  window.location = "/users/Profile";
         })
         .catch((err) => console.log(err))
 
@@ -33,7 +40,7 @@ function Commentaire() {
         <form enctype="multipart/form-data"   onSubmit={handleCommentaire}  >
           <div class="header">
             <h2 class="d-block p-2 bg-black text-white lead text-center ">
-              firstnameDynamique vous commentez la publication numéro
+             {recupData.firstname} vous commentez la publication numéro   {/*{userMessage} */}
               <span class="badge font-weight-bold badge-light">
                 idValeurDynamique de la publication
               </span>

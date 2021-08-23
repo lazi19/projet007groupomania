@@ -7,7 +7,7 @@
  function Footer() {
      return (
          <footer>
-             <h1 className='h1Footer'>Création  un réseau social d’entreprise Groupomania P7</h1>
+             <h1 className='h1Footer'>Création d'un réseau social d’entreprise Groupomania P7</h1>
          </footer>
      )
  }

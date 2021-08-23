@@ -11,15 +11,22 @@ const { User } = require("../models/index"); // Importation du modèle User //
 // };
 
 // Get all users
+
 exports.getAllUsers = async (req, res) => {
   try {
       const userModels = await User.findAll();
       res.send(userModels);
-      // res.status(200).json(userModels);
+      res.status(200).json(userModels);
   } catch (err) {
       console.log(err);
   }
 }
+
+// exports.getAllUsers = (req, res, next) => {
+//   User.findAll()
+//     .then((users) => res.status(200).json(users))
+//     .catch((error) => res.status(400).json({ error }));
+// };
 
 // Get user by id
 exports.getUserById = async (req, res) => {
@@ -58,7 +65,7 @@ exports.deleteUser = async (req, res) => {
   try {
       await User.destroy({
           where: {
-            // id: user.id 
+            // id: user.id ||
             id: req.params.id,
           }
 

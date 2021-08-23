@@ -6,6 +6,7 @@ const path = require("path");
 //routes
 const userRoutes = require("./routes/user.js");
 const messageRoutes = require('./routes/message');
+// const commentaireRoutes = require('./routes/commentaire');
 
 //db
 const { sequelize } = require("./models/index");
@@ -36,11 +37,15 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.use("/images", express.static(path.join(__dirname, "images")));
+
 app.use("/api/users", userRoutes);
  
 app.use("/api/messages", messageRoutes);
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+// app.use("/api/commentaires", commentaireRoutes);
+
 
 const dbTest = async function () {
   try {

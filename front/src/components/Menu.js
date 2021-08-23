@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link, NavLink } from "react-router-dom";
+
   
 
 import '../styles/Menu.css'
@@ -11,7 +12,9 @@ function Menu() {
                     <link>
                     </link>
                      <Link to="/">
-                            <img className="logo"  src="../img/icon-left-font-monochrome-color.png" alt="Logo Groupomania "/>
+                            <img className="logo"  
+                            src="../img/logo.png" alt="Logo Groupomania "
+                            />
                      </Link>                   
 
                     <ul>

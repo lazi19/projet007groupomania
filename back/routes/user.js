@@ -11,7 +11,7 @@ const userCtrl = require("../controllers/user.js");
 
 
 // Route get all users
-router.get("/", auth, userCtrl.getAllUsers);
+router.get("/", userCtrl.getAllUsers);
 // Route get user by id
 router.get("/:id", auth, userCtrl.getUserById);
 // Route update user by id
