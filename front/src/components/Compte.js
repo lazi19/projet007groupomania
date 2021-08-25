@@ -1,12 +1,14 @@
 
 import React from "react";
-
+import { useHistory } from "react-router-dom";
 
 function Compte() {
     const user = JSON.parse(localStorage.getItem('user'))
     console.log(user)
     console.log("id : " + user.id)
-  
+    const history = useHistory();
+    console.log(history);
+
 
     const removeCompte = (id) => {
       
@@ -19,24 +21,27 @@ function Compte() {
 
         fetch( `http://localhost:5000/api/users/${id}`, requestOptions) 
         .then((response) => {
-            console.log(response);
-           
+            console.log(response);          
             localStorage.clear()
             alert('Utilisateur supprimé')
             window.location = '/login'
-          })
+           
+        })
+        
          
-          .catch((error) => {
+        .catch((error) => {
             console.log(error)
-          }) 
+        }) 
                 // localStorage.clear()
                 // window.location.pathname="/Login"
                 // localStorage.removeItem('user')
                 // window.location = '/Login'
     }
 
-    const handleClick = () =>  {
-        window.location = '/users/Profile' 
+    const handleClickAnnuler = () =>  {
+        // window.location = '/users/Profile'
+        window.location = `/users/Profile/${user.id}`
+
     }
     return (
         <main class="container" >
@@ -64,7 +69,7 @@ function Compte() {
 
                         <div class="d-flex justify-content-center ">
                             <button type="button" class="btn btn-danger m-3 font-weight-bold " onClick={() => removeCompte(user.id)} >SUPPRIMER VOTRE COMPTE</button>
-                            <button type="button" class="btn btn-secondary m-3 font-weight-bold "  onClick={handleClick} >Annuler</button>
+                            <button type="button" class="btn btn-secondary m-3 font-weight-bold "  onClick={handleClickAnnuler} >Annuler</button>
 
                         </div>
                         

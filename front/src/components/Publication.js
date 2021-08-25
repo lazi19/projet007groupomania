@@ -39,8 +39,7 @@ function Publication() {
           body:  JSON.stringify({
                       message,
                       file,
-                      userId
-                     
+                      userId        
           }),
       };
       
@@ -48,12 +47,16 @@ function Publication() {
           .then(response => response.json())
           .then(data => { console.log(data);
             
-            //  window.location = `/users/Profile/${id}`;
+            window.location = `/users/Profile/${userId}`
           })
           .catch((err) => console.log(err))
     }
 
-    
+    const handleClickAnnuler = () =>  {
+        // window.location = '/users/Profile'
+        window.location = `/users/Profile/${userId}`
+
+    }
 
     
 //modification message existant
@@ -161,13 +164,14 @@ function Publication() {
                   >
                     Modifier message
                   </button> */}
-
-                  <Link to="/users/Profile">
+  
+                  {/* <Link to="/users/Profile">
                     <div className="btn btn-danger   m-2 p-2">
                       {' '}
                       Annuler/Retour
                     </div>
-                  </Link>
+                  </Link> */}
+                  <button type="button" class="btn btn-danger m-3 font-weight-bold "  onClick={handleClickAnnuler} >Annuler/Retour</button>
 
                 </div>
                

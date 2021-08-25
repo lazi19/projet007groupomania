@@ -2,10 +2,15 @@
 // import React, { Component } from 'react';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+// import { useHistory } from "react-router-dom";
 import '../styles/Signup.css'
 
 function Login() {
+
+  // const history = useHistory();
+  //   console.log("history : " + history);
+
   // const { register, handleSubmit, formState } = useForm(formOptions);
   const { register, handleSubmit } = useForm()
   const [postId, setPostId] = useState(null)
@@ -24,19 +29,21 @@ function Login() {
     }
 
     fetch('http://localhost:5000/api/users/login', requestOptions)
-      .then((response) => response.json())
+      .then((response) => {
+        response.json()
+        console.log(response)
+      } )
       .then((data) => {
         setPostId(data.id)
         console.log(data)
-
-        // sessionStorage.setItem('user', JSON.stringify(data))
         localStorage.setItem('user', JSON.stringify(data))
-        window.location = `/users/Profile/${data.id}`
-      
+        // window.location = `/users/Profile/${data.id}`
       })
-      .catch(function (err) {
-        alert(err)
-      })
+      .catch((error)=>{
+        console.log(error);
+        alert(error)
+    })
+     
   }
 
   return (

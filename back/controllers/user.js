@@ -14,13 +14,13 @@ const { User } = require("../models/index"); // Importation du modèle User //
 
 exports.getAllUsers = async (req, res) => {
   try {
-      const userModels = await User.findAll();
-      res.send(userModels);
-      res.status(200).json(userModels);
+    const userModels = await User.findAll();
+    res.send(userModels);
+    res.status(200).json(userModels);
   } catch (err) {
-      console.log(err);
+    console.log(err);
   }
-}
+};
 
 // exports.getAllUsers = (req, res, next) => {
 //   User.findAll()
@@ -31,69 +31,66 @@ exports.getAllUsers = async (req, res) => {
 // Get user by id
 exports.getUserById = async (req, res) => {
   try {
-      const userModels = await User.findAll({
-          where: {
-              id: req.params.id
-          }
-      });
-      res.send(userModels[0]);
+    const userModels = await User.findAll({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.send(userModels[0]);
   } catch (err) {
-      console.log(err);
+    console.log(err);
   }
-}
+};
 
 // Update user by id
 exports.updateUser = async (req, res) => {
   try {
-      await User.update(req.body, {
-          where: {
-              id: req.params.id
-          }
-      });
-      res.send({ "message": "user Updated", "req.body" : req.body });
-     
+    await User.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.send({ message: "user Updated", "req.body": req.body });
   } catch (err) {
-      console.log(err);
+    console.log(err);
   }
-}
+};
 
-
- 
 // Delete user by id
-exports.deleteUser = async (req, res) => { 
- 
+exports.deleteUser = async (req, res) => {
   try {
-      await User.destroy({
-          where: {
-            // id: user.id ||
-            id: req.params.id,
-          }
+    await User.destroy({
+      where: {
+        // id: user.id ||
+        // req.session.destroy();
+        id: req.params.id,
+      },
+    });
+    res.json({
+      message: "user Deleted",
+    });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 
-      });
-      res.json({
-          "message": "user Deleted"
-      });
-   } 
-  catch (error) {res.status(500).json({ error })} ;
-  
   // catch (err) {
   //     console.log(err);
   // }
-}
+};
 
 // exports.deleteUser = async (req, res) => {
 //   console.log(req)
+
 //   User.findOne({id: req.params.id})
-//   .then(user => {
+//   .then((user) => {
 //       User.deleteOne({ id: req.params.id })
 //         .then(() => res.status(200).json({ message: 'User supprimé !'}))
 //         .catch(error => res.status(400).json({ error }));
- 
+
 //   })
 //   .catch(error => res.status(500).json({ error}));
 
 // };
- 
 
 // Pour que l'utilisateur se connecte
 exports.login = (req, res, next) => {
@@ -124,7 +121,7 @@ exports.login = (req, res, next) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-// Create a new 
+// Create a new
 exports.createUser = async (req, res, next) => {
   try {
     const user = await User.findOne({

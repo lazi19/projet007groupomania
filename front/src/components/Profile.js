@@ -26,10 +26,9 @@ function Profile() {
       .then((response) => response.json())
       .then((result) => {
         setPublications(result)
-        // console.log("setPublications :", setPublications)
         console.log(result)
-        localStorage.setItem('dataMessage', JSON.stringify(result))
-        // const userId = JSON.parse(localStorage.getItem('dataMessage.userId'))
+
+        localStorage.setItem('dataMessage', JSON.stringify(result))       
         
         // const dataMessage = JSON.parse(localStorage.getItem('dataMessage'))
 
@@ -49,17 +48,19 @@ function Profile() {
       .catch((err) => console.log(err))
   }, [user.id])
  
+
+  // if ({ id : user.id }){
+      
+  //   document.getElementById('maBtn').style.display= "none"
+  // }else{
+  //   document.getElementById('maBtn').style.display = "contents"
+  // }
+
+  
+     
   // supprimer message
   const removedMessage = (id) => {
     console.log('Le lien a été cliqué.')
-    if (  publications.userId !== user.id )
-    {document.getElementById('maBtn').style.display = "hidden" }
-
-    // if ({ id = params.id });
-      //  :   document.getElementById('maBtn').hidden=false)
-      // {
-    // document.getElementById('maBtn').hidden
-    // }
     
     const requestOptions = {
       method: 'DELETE',
@@ -159,7 +160,7 @@ function Profile() {
                   className="maBtn"
                   onClick={() => removedMessage(publication.id)}
                   disabled={ publication.userId !== user.id ? true : false }
-                
+                  
                 >
                   supprimer Message<i className="bi bi-trash"></i>
                 </button>

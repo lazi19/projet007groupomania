@@ -59,14 +59,13 @@ function Signup() {
             .then(response => response.json())
             .then((data)=> {
                 setPostId(data.id) 
-                window.location = "/Login"
+                // window.location = "/Login"
             })
             .catch(err => {
                 //On traite ici les erreurs éventuellement survenues
                 console.log( err);
             });
 
-            console.log("setPostId :" + setPostId(data.id) + data )
     }
 
     return (
