@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link, NavLink } from "react-router-dom";
+import logo from "../images/logo.png";
 
   
 
@@ -13,13 +14,16 @@ function Menu() {
                     </link>
                      <Link to="/">
                             <img className="logo"  
-                            src="../img/logo.png" alt="Logo Groupomania "
+                            // src="../img/logo.png"
+                            src={logo} 
+                            alt="Logo Groupomania "
                             />
                      </Link>                   
 
                     <ul>
                         <NavLink to="/Login">s'identifier</NavLink>
                         <NavLink to="/Signup" >s'inscrire</NavLink>
+                        <NavLink to="/users/Profile/:id" ><i class="fas fa-home"></i></NavLink>
                     </ul>
                 </nav>
 

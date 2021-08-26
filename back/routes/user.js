@@ -20,12 +20,6 @@ router.put("/:id", auth, userCtrl.updateUser);
 router.delete("/:id", auth, userCtrl.deleteUser);
 
 
-
-
-
-
-
-
 // Route create a new user
 router.post("/" , userCtrl.createUser); // a la place de signup
 

@@ -65,9 +65,9 @@ function App() {
                             <Compte />
                       </Route>
                       
-                      {/* <Route  path="/users/Profile/:id">
+                      <Route  path="/users/Profile/:id">
                             <Profile />
-                      </Route> */}
+                      </Route>
                       {/* <Route path="/users/:id" component={Profile} /> */}
                       
                       <Route  path="/users/Administrateur" >
@@ -79,10 +79,6 @@ function App() {
                   </Switch>
 
               <Footer /> 
-
-            
-                  
-      
           </div>
 
       </Router>
