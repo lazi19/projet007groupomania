@@ -19,38 +19,48 @@ function Publication() {
 
          e.preventDefault();
 
-        //  const data = new FormData();
-
-        //  data.append("message", message);
-        //  data.append("file", file);
-        //  data.append("userId", userId);
-        //  data.append("firstname", firstname);
-        // const publicationMessageImageToken = {message, file, recupToken }
-       
+      
         console.log( file);
-        console.log("message : " + message);
-        // console.log(data);
+        console.log("message ***** : " + message);
+     
+        const data = new FormData()
+        data.append('message', message)
+        data.append('file', file)
+        data.append('userId', userId)
 
-//Publication nouveau du message
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        console.log("data : " + data);
+ 
+ 
+// Publication nouveau  message
+
+      //   const requestOptions = {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json' },
         
-          body:  JSON.stringify({
-                      message,
-                      file,
-                      userId        
-          }),
-      };
+      //     body:  JSON.stringify({
+      //                 message,
+      //                 file,
+      //                 userId        
+      //     }),
+      // };
+
+
+const requestOptions = {
+  method: 'POST',
+  // body: JSON.stringify(data),
+  body: data
+}
       
       fetch('http://localhost:5000/api/messages', requestOptions)
-          .then(response => response.json())
-          .then(data => { console.log(data);
-            
-            window.location = `/users/Profile/${userId}`
+          // .then(response => response.json())
+          .then((response) => {
+            return response.json()
+          })
+          .then(data => { console.log(data);            
+            // window.location = `/users/Profile/${userId}`
           })
           .catch((err) => console.log(err))
-    }
+}
 
     const handleClickAnnuler = () =>  {
         // window.location = '/users/Profile'

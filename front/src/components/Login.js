@@ -29,15 +29,19 @@ function Login() {
     }
 
     fetch('http://localhost:5000/api/users/login', requestOptions)
-      .then((response) => {
-        response.json()
-        console.log(response)
-      } )
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error(response.status)
+      }
+
+      return response.json()
+    })
+    
       .then((data) => {
         setPostId(data.id)
         console.log(data)
         localStorage.setItem('user', JSON.stringify(data))
-        // window.location = `/users/Profile/${data.id}`
+        window.location = `/users/Profile/${data.id}`
       })
       .catch((error)=>{
         console.log(error);

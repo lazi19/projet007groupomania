@@ -56,10 +56,15 @@ function Signup() {
         };
         
         fetch('http://localhost:5000/api/users', requestOptions)
-            .then(response => response.json())
+            .then(response =>{
+                if (response.status !== 201) {
+                    throw new Error(response.status)
+                  }
+                return response.json()} )
+
             .then((data)=> {
                 setPostId(data.id) 
-                // window.location = "/Login"
+                window.location = "/Login"
             })
             .catch(err => {
                 //On traite ici les erreurs éventuellement survenues

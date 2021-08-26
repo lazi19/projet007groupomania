@@ -36,7 +36,7 @@ function Commentaire() {
 
   return (
     <main className="">
-      <section class="row card bg-light m-5 p-3">
+      <section className="row card bg-light m-5 p-3">
         <form enctype="multipart/form-data"   onSubmit={handleCommentaire}  >
           <div class="header">
             <h2 class="d-block p-2 bg-black text-white lead text-center ">
