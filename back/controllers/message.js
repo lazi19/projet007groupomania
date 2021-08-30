@@ -7,7 +7,7 @@ const {Comment} = require ("../models/index.js")
 const {User} = require ("../models/index.js")
 const { Message } = require("../models/index"); // Importation du modèle User //
 const jwt = require("jsonwebtoken"); // Sécurisation de la connection grâce à des tokens uniques //
-
+// var multer = require('multer');
 const fs = require("fs");
 
 // const decodeId = (authorization) => {
@@ -21,8 +21,10 @@ const fs = require("fs");
 // Routes CRUD : Create, Read, Update, Delete.
 
 exports.createMessage = (req, res, next) => {
-
-  console.log(" req.body :" + req.body);
+  const reqBody = JSON.stringify(req.body)
+console.log(" reqBody:" + reqBody)
+  // console.log(" req.data.image :" +  req.body.data);
+  console.log(" req.body :" +  req.body);
   console.log(" req.body.message :" + req.body.message);
   // const messageObject = JSON.parse(req.body);
   // console.log("messageObject :" + messageObject.message)
@@ -44,6 +46,7 @@ exports.createMessage = (req, res, next) => {
     // UserId: req.body.UserId,
     message: req.body.message,
     messageUrl: imagePost,
+    // messageUrl: req.file.filename,
     userId:  req.body.userId
   });
   console.log(message);

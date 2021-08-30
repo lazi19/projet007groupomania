@@ -3,39 +3,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import * as Yup from 'yup';
+
 import '../styles/Signup.css';
 
 
 function Signup() {
-
-//  // form validation rules 
-//  const validationSchema = Yup.object().shape({
-//    
-//     firstname: Yup.string()
-//         .required('First Name is required'),
-//     lastname: Yup.string()
-//         .required('Last name is required'),
-//     // dob: Yup.string()
-//     //     .required('Date of Birth is required')
-//     //     .matches(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/, 'Date of Birth must be a valid date in the format YYYY-MM-DD'),
-//     mail: Yup.string()
-//         .required('Email is required')
-//         .mail('Email is invalid'),
-//     password: Yup.string()
-//         .min(6, 'Password must be at least 6 characters')
-//         .required('Password is required'),
-//     confirmPassword: Yup.string()
-//         .oneOf([Yup.ref('password'), null], 'Passwords must match')
-//         .required('Confirm Password is required'),
-//     acceptTerms: Yup.bool()
-//         .oneOf([true], 'Accept Ts & Cs is required')
-// });
-
-// const formOptions = { resolver: yupResolver(validationSchema) };
-
-
 
     // const { register, handleSubmit, formState } = useForm(formOptions);
     const { register, handleSubmit } = useForm();
@@ -58,9 +30,11 @@ function Signup() {
         fetch('http://localhost:5000/api/users', requestOptions)
             .then(response =>{
                 if (response.status !== 201) {
-                    throw new Error(response.status)
-                  }
-                return response.json()} )
+                    throw  new Error( response.status ) ;
+                }
+
+                return response.json()
+            })
 
             .then((data)=> {
                 setPostId(data.id) 
@@ -68,7 +42,8 @@ function Signup() {
             })
             .catch(err => {
                 //On traite ici les erreurs éventuellement survenues
-                console.log( err);
+                console.log( err + " utilistauer deja créer");
+                alert(err + " utilistauer deja créer")
             });
 
     }
@@ -107,6 +82,9 @@ function Signup() {
                         <div className="formPassword">
                             <label htmlFor="password">Mot de passe</label>
                             <input type="password"  id="password"  name="password"  required  placeholder="Enter Password "
+                             minLength="8"
+                             pattern="(?=.*\d)(?=.*[a-z]).{8,}"
+                             title= "Mot de pasese doit contenir au moins un chiffre et une lettre majuscule et minuscule et au moins 8 caractères ou plus"
                             {...register('password')} //className={`form-control ${errors.password ? 'is-invalid' : ''}`} 
                             />
                             {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
@@ -166,7 +144,7 @@ export default Signup;
 //                         <div className="formNom">
 //                             <label htmlFor="lastname">Nom </label>
 //                             <input
-//                                 type="text"  id="lastname"  required  placeholder="Votre Nnom"
+//                                 type="text"  id="lastname"  required  placeholder="Votre Nom"
 //                                 {...register("lastname")} 
 //                             />
                            

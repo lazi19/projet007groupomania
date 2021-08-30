@@ -19,8 +19,9 @@ créer localement la base de donnée « projet007 »
 
 Dans l'invite de commande déplacez vous dans le dossier back : cd back , tapez sequelize db:create , puis sequelize db:migrate , (assurez vous que sequelize-cli est bien installé)
 
-Dans le dossier back => models => index.js suivez les instructions pour créer un compte modérateur , enregistrez les modifications , puis lancer nodemon.
+<!-- Dans le dossier back => models => index.js suivez les instructions pour créer un compte modérateur , enregistrez les modifications , puis lancer nodemon. -->
+Pour le back déplacez vous dans le dossier back à l’aide de la commande cd back puis nodemon server.
 
-Pour le front déplacez vous dans le dossier front à l’aide de la commande cd frontend puis npm start
+Pour le front déplacez vous dans le dossier front à l’aide de la commande cd front puis npm start.
 
-Vous pouvez maintenant vous connecter avec votre compte modérateur ou créer un autre compte normal
+Vous pouvez maintenant vous connecter avec votre compte modérateur ou créer un autre compte normal.

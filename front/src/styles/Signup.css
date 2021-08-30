@@ -38,7 +38,7 @@ input[type=text], input[type=password], input[type=email] {
   }
   .signupbtn{
    
-        background-color: #04AA6D; /*#fd2d01; */
+        background-color: #a17a7a ; /*#04AA6D */
         border-radius: 5px;
         color: white;
         padding: 14px 20px;

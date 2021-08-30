@@ -38,20 +38,20 @@ function Commentaire() {
     <main className="">
       <section className="row card bg-light m-5 p-3">
         <form enctype="multipart/form-data"   onSubmit={handleCommentaire}  >
-          <div class="header">
-            <h2 class="d-block p-2 bg-black text-white lead text-center ">
+          <div className="header">
+            <h2 className="d-block p-2 bg-black text-white lead text-center ">
              {recupData.firstname} vous commentez la publication numéro   {/*{userMessage} */}
-              <span class="badge font-weight-bold badge-light">
+              <span className="badge font-weight-bold badge-light">
                 idValeurDynamique de la publication
               </span>
             </h2>
           </div>
 
-          <div class="row">
-            <div class="col-12 justify-content-center form-group">
+          <div className="row">
+            <div className="col-12 justify-content-center form-group">
               <label for="newComment">À vos claviers...</label>
               <textarea
-                class="form-control"
+                className="form-control"
                 id="newComment"
                 name="comment"
                 rows="8"
@@ -62,11 +62,11 @@ function Commentaire() {
              />
             </div>
           </div>
-          <div class="d-flex justify-content-between flex-wrap">
+          <div className="d-flex justify-content-between flex-wrap">
             <div>
               <button
                 type="submit"
-                class="btn btn-dark  font=weight-bold btn-block m-2 p-2"
+                className="btn btn-dark  font=weight-bold btn-block m-2 p-2"
               >
                 Valider
               </button>
@@ -81,7 +81,7 @@ function Commentaire() {
               </Link>
             </div>
           </div>
-          <div class="invalidBox m-2">
+          <div className="invalidBox m-2">
             {/*style="display: none" */}
             <p>
               {' '}

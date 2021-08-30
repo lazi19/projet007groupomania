@@ -30,23 +30,30 @@ function Login() {
 
     fetch('http://localhost:5000/api/users/login', requestOptions)
     .then((response) => {
+      console.log(response)
       if (response.status !== 200) {
-        throw new Error(response.status)
+        throw new Error(response.status);        
       }
-
       return response.json()
     })
-    
+
       .then((data) => {
         setPostId(data.id)
         console.log(data)
         localStorage.setItem('user', JSON.stringify(data))
+        // localStorage.setItem("isAuthenticated", "true")
         window.location = `/users/Profile/${data.id}`
+
+        if(data.id === 38){
+          localStorage.setItem("isAdmin", "true")
+        }else{
+          localStorage.setItem("isAdmin", "false")
+        }
       })
       .catch((error)=>{
-        console.log(error);
-        alert(error)
-    })
+        console.log(error + "  Utilisateur non trouvé ou Mot de passe incorrect !" );
+        alert(error + " Utilisateur non trouvé ou Mot de passe incorrect !")
+      })
      
   }
 
@@ -68,7 +75,7 @@ function Login() {
               id="firstname"
               name="firstname"
               required
-              placeholder="Votre Nnom"
+              placeholder="Votre Nom"
               {...register('firstname')} //className={`form-control ${errors.firstname ? 'is-invalid' : ''}`}
             />
             {/* <div className="invalid-feedback">{errors.firstname?.message}</div> */}

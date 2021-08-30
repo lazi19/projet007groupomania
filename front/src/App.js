@@ -9,6 +9,8 @@ import Commentaire from './components/Commentaire';
 import Publication from './components/Publication';
 import Compte from './components/Compte';
 import Administrateur from './components/Administrateur';
+import FormApdate from './components/FormApdate';
+
 import ErrorPage from './components/ErrorPage';
 
 
@@ -73,6 +75,16 @@ function App() {
                       <Route  path="/users/Administrateur" >
                             <Administrateur />
                       </Route>
+
+                      <Route  path="/FormApdate" >
+                              <FormApdate />
+                      </Route> 
+                      
+                      <Route  path="/users/Compte/:id/FormApdate" >
+                              <FormApdate />
+                             
+                      </Route>
+                       
 
                       <Route  component={ErrorPage} />
 

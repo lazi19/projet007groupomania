@@ -16,14 +16,13 @@ function Publication() {
     const [file, setFile] = useState();
 
     const handleMessagePicture = (e) => {
-
          e.preventDefault();
-
-      
-        console.log( file);
+         
+      if (message || file){
+         console.log( file);
         console.log("message ***** : " + message);
      
-        const data = new FormData()
+        const data = new FormData();
         data.append('message', message)
         data.append('file', file)
         data.append('userId', userId)
@@ -31,36 +30,44 @@ function Publication() {
         console.log("data : " + data);
  
  
-// Publication nouveau  message
+    // Publication nouveau  message
 
-      //   const requestOptions = {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
         
-      //     body:  JSON.stringify({
-      //                 message,
-      //                 file,
-      //                 userId        
-      //     }),
-      // };
+          body:  JSON.stringify({
+                      message,
+                      file,
+                      userId        
+          }),
+      };
 
 
-const requestOptions = {
-  method: 'POST',
-  // body: JSON.stringify(data),
-  body: data
-}
+      // const requestOptions = {
+      // method: 'POST',
+      // // body: JSON.stringify(data),
+      // body: JSON.stringify(data),
+      // }
       
       fetch('http://localhost:5000/api/messages', requestOptions)
           // .then(response => response.json())
           .then((response) => {
             return response.json()
           })
-          .then(data => { console.log(data);            
+          .then(data => { 
+            console.log(data);
+            alert("Message crée")
+            
             // window.location = `/users/Profile/${userId}`
           })
           .catch((err) => console.log(err))
-}
+    
+
+      }else {
+        alert("Veuillez entrer un message")
+      }
+     } 
 
     const handleClickAnnuler = () =>  {
         // window.location = '/users/Profile'
@@ -68,30 +75,30 @@ const requestOptions = {
 
     }
 
-    
-//modification message existant
+            
+        //modification message existant
 
-// const modifMessagePicture = (id) => {
- 
-//   console.log('Le lien a été cliqué.');
-//   const requestOptions = {
-//       method: 'update',
-//       headers: {  Authorization: "Bearer " + recupData.token }
-//   }
+        // const modifMessagePicture = (id) => {
+        
+        //   console.log('Le lien a été cliqué.');
+        //   const requestOptions = {
+        //       method: 'update',
+        //       headers: {  Authorization: "Bearer " + recupData.token }
+        //   }
 
-//   fetch( `http://localhost:5000/api/messages/${id}`, requestOptions) 
-//   .then((response) => {
-//       console.log(response);
-     
-//       // localStorage.clear()
-//       alert('message modifier')
-//       // window.location = '/login'
-//     })
-   
-//     .catch((error) => {
-//       console.log(error)
-//     }) 
-// }
+        //   fetch( `http://localhost:5000/api/messages/${id}`, requestOptions) 
+        //   .then((response) => {
+        //       console.log(response);
+            
+        //       // localStorage.clear()
+        //       alert('message modifier')
+        //       // window.location = '/login'
+        //     })
+          
+        //     .catch((error) => {
+        //       console.log(error)
+        //     }) 
+        // }
 
 
   return (
@@ -141,7 +148,7 @@ const requestOptions = {
             </div>
             <div className="col-12 justify-content-center">
               <div className="form-group justify-content-center">
-                <label htmlFor="File"> Choisir une nouvelle photo  </label> {' '}
+                <label htmlFor="File"> Choisir une photo  </label> {' '}
                 <input
                   type="file"
                   useRef="file"
@@ -181,14 +188,14 @@ const requestOptions = {
                       Annuler/Retour
                     </div>
                   </Link> */}
-                  <button type="button" class="btn btn-danger m-3 font-weight-bold "  onClick={handleClickAnnuler} >Annuler/Retour</button>
+                  <button type="button" className="btn btn-danger m-3 font-weight-bold "  onClick={handleClickAnnuler} >Annuler/Retour</button>
 
                 </div>
                
           </div>
           <div v-show="isInvalid" className="invalidBox m-2" key="invalid">
             <p id=''>
-              Vous ne pouvez pas envoyer de post sans contenu (vous devez
+              Vous ne pouvez pas envoyer une publication sans contenu (vous devez
               inclure texte ou image). Votre message doit faire moins de 1500
               caractères.
             </p>
