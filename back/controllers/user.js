@@ -3,12 +3,6 @@ const jwt = require("jsonwebtoken"); // Sécurisation de la connection grâce à
 
 const { User } = require("../models/index"); // Importation du modèle User //
 
-// const decodeId = (token) => {
-//   const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
-//   return {
-//     id: decodedToken.userId,
-//   };
-// };
 
 // Get all users
 
@@ -21,12 +15,6 @@ exports.getAllUsers = async (req, res) => {
     console.log(err);
   }
 };
-
-// exports.getAllUsers = (req, res, next) => {
-//   User.findAll()
-//     .then((users) => res.status(200).json(users))
-//     .catch((error) => res.status(400).json({ error }));
-// };
 
 // Get user by id
 exports.getUserById = async (req, res) => {
@@ -73,24 +61,8 @@ exports.deleteUser = async (req, res) => {
     res.status(500).json({ error });
   }
 
-  // catch (err) {
-  //     console.log(err);
-  // }
 };
 
-// exports.deleteUser = async (req, res) => {
-//   console.log(req)
-
-//   User.findOne({id: req.params.id})
-//   .then((user) => {
-//       User.deleteOne({ id: req.params.id })
-//         .then(() => res.status(200).json({ message: 'User supprimé !'}))
-//         .catch(error => res.status(400).json({ error }));
-
-//   })
-//   .catch(error => res.status(500).json({ error}));
-
-// };
 
 // Pour que l'utilisateur se connecte
 exports.login = (req, res, next) => {

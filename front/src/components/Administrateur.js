@@ -42,11 +42,7 @@ function Administrateur() {
             }) 
         // }, [id])      
     }
-
-
-
-
-      // Afficher tous les compts
+      // Afficher tous les comptes
     const AfficherComptes=() => {
 
         fetch('http://localhost:5000/api/users')
@@ -96,10 +92,6 @@ function Administrateur() {
        }) 
        
     }
-
-    
-
-
         return (
                 <div>
                     <hr></hr>

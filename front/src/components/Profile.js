@@ -7,8 +7,7 @@ import Administrateur from './Administrateur';
 
 function Profile() {
 
-  const user = JSON.parse(localStorage.getItem('user'));
- 
+  const user = JSON.parse(localStorage.getItem('user')); 
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
   // const isAdmin = user.isAdmin;
   console.log('isAdmin:' + isAdmin);
@@ -16,8 +15,6 @@ function Profile() {
   console.log('firstname :' + user.firstname);
 
   const [publications, setPublications] = useState([]);
-
-
 
   // console.log('afficher publications : ' + publications)
   // console.log('afficher setPublications : ' + setPublications)
@@ -97,8 +94,6 @@ function Profile() {
   // }
 
 
- 
-  
   if (isAdmin === false){
     return (
       <main className="container mt10">

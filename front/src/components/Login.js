@@ -1,4 +1,4 @@
-// import React from 'react';
+
 // import React, { Component } from 'react';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -11,7 +11,6 @@ function Login() {
   // const history = useHistory();
   //   console.log("history : " + history);
 
-  // const { register, handleSubmit, formState } = useForm(formOptions);
   const { register, handleSubmit } = useForm()
   const [postId, setPostId] = useState(null)
 
@@ -76,9 +75,9 @@ function Login() {
               name="firstname"
               required
               placeholder="Votre Nom"
-              {...register('firstname')} //className={`form-control ${errors.firstname ? 'is-invalid' : ''}`}
+              {...register('firstname')} 
             />
-            {/* <div className="invalid-feedback">{errors.firstname?.message}</div> */}
+           
           </div>
 
           <div className="formMail">
@@ -89,9 +88,9 @@ function Login() {
               name="mail"
               required
               placeholder="email@serveur.com"
-              {...register('mail')} //className={`form-control ${errors.mail ? 'is-invalid' : ''}`}
+              {...register('mail')} 
             />
-            {/* <div className="invalid-feedback">{errors.mail?.message}</div> */}
+           
           </div>
 
           <div className="formPassword">
@@ -102,9 +101,8 @@ function Login() {
               name="password"
               required
               placeholder="Enter Password "
-              {...register('password')} //className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+              {...register('password')}
             />
-            {/* <div className="invalid-feedback">{errors.password?.message}</div> */}
             <br />
             <br />
           </div>

@@ -6,7 +6,7 @@ function FormApdate() {
     const [data, setData] = useState("");
     const [postId, setPostId] = useState(null);
     const [lastname, setLastname] = useState("");
-    const [firstename, setFirstname] = useState("");
+    const [firstname, setFirstname] = useState("");
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
  
@@ -19,8 +19,9 @@ function FormApdate() {
             // headers: { 'Content-Type': 'application/json' },
             headers: {  Authorization: "Bearer " + user.token },
             body: JSON.stringify({
+                
+                firstname : firstname,
                 lastname : lastname,
-                firstname : firstename,
                 mail : mail,
                 password : password
             })
@@ -35,16 +36,12 @@ function FormApdate() {
                 localStorage.setItem('user', JSON.stringify(data))
                 // localStorage.setItem("isAuthenticated", "true")
                 // window.location = `/users/Profile/${data.id}`
-               
             })
             .catch(err => {
                 //On traite ici les erreurs éventuellement survenues
-                // console.log( err + " utilistauer deja créer");
+                // console.log( err + " données mis à jour");
                 alert(err )
             });
-       
-                
-       
     }
 
 
@@ -73,12 +70,12 @@ function FormApdate() {
                     name="firstname"
                     required
                     placeholder="Votre Prenom" 
-                    value={firstename} 
+                    value={firstname} 
                     onChange={e => setFirstname(e.target.value)}
                     />
                 </label>
                 
-            <label htmlFor="mail" class="col-sm-2 col-form-label "> E-mail         
+            <label htmlFor="mail" > E-mail         
                 <input 
                 class="form-control-plaintext mt-3 "
                     type="mail"
@@ -107,9 +104,6 @@ function FormApdate() {
 
                 />
              </label>
-            
-
-
                 <button class="btn btn-secondary m-2 " type="submit" value="Submit " >Envoyer les données</button>
              </form>
     )

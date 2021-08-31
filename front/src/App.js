@@ -75,12 +75,12 @@ function App() {
                       <Route  path="/users/Administrateur" >
                             <Administrateur />
                       </Route>
-
+{/* 
                       <Route  path="/FormApdate" >
                               <FormApdate />
                       </Route> 
-                      
-                      <Route  path="/users/Compte/:id/FormApdate" >
+                       */}
+                      <Route  path="/users/Compte/FormApdate/:id" >
                               <FormApdate />
                              
                       </Route>
