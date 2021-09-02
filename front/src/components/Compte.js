@@ -10,9 +10,13 @@ function Compte() {
     console.log(user)
     console.log("id : " + user.id)
     const history = useHistory();
-    console.log(history);
+    console.log("history:" + history );
 
-    const [state, setState] = useState();
+
+
+    
+
+    // const [state, setState] = useState();
 
     const removeCompte = (id) => {
       
@@ -28,12 +32,14 @@ function Compte() {
             console.log(response);          
             localStorage.clear()
             alert('Utilisateur supprimé')
+            // window.confirm('Utilisateur supprimé')
+
             window.location = '/login'
         })
         .catch((error) => {
             console.log(error)
         }) 
-                // localStorage.clear()
+               
                 // window.location.pathname="/Login"
                 // localStorage.removeItem('user')
                 // window.location = '/Login'
@@ -42,24 +48,21 @@ function Compte() {
     const handleClickAnnuler = () =>  {
         // window.location = '/users/Profile'
         window.location = `/users/Profile/${user.id}`
-
     }
    
-    const handleUpdate = () =>  {
+    // const handleUpdate = () =>  {
         
-        // setState({ display: "none" })
-         <Link to="/users/Compte/FormApdate/:id" component={FormApdate}></Link>
-        // window.location = `/users/Compte/FormApdate/${user.id}`
-        // React.createElement(<div className='formUpdate'>affiche formulaire</div>)
+    //     // setState({ display: "none" })
+    //      <Link to="/users/Compte/FormApdate/:id" component={FormApdate}></Link>
+    //     // window.location = `/users/Compte/FormApdate/${user.id}`
+    //     // React.createElement(<div className='formUpdate'>affiche formulaire</div>)
     
-    }
+    // }
 
 
 
     return (
         <main className="container" >
-
-        
             <div className="row justify-content-center " >
                 <div className="row maRow d-flex col-10  " >
                      <div className=" col col-8 justify-content-end ">
@@ -80,7 +83,7 @@ function Compte() {
                             </button>
                         </div> 
 
-                        <div className="d-flex justify-content-center ">
+                        <div className="d-flex justify-content-center flex-wrap ">
                             <button type="button" className="btn btn-danger m-3 font-weight-bold " onClick={() => removeCompte(user.id)} >SUPPRIMER VOTRE COMPTE</button>
                             <button type="button" className="btn btn-secondary m-3 font-weight-bold "  onClick={handleClickAnnuler} >Annuler</button>
                             {/* <button type="button" className="btn btn-secondary m-3 font-weight-bold "  

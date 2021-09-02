@@ -10,11 +10,20 @@ function Profile() {
   const user = JSON.parse(localStorage.getItem('user')); 
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'));
   // const isAdmin = user.isAdmin;
-  console.log('isAdmin:' + isAdmin);
-  console.log('user:' + user.id);
-  console.log('firstname :' + user.firstname);
+ 
 
   const [publications, setPublications] = useState([]);
+
+  const [id, setId] = useState(null);
+
+    if(!user){
+      window.location = `/`
+    } 
+
+ console.log('isAdmin:' + isAdmin);
+  console.log('user:' + user.id);
+  console.log('firstname :' + user.firstname);
+  
 
   // console.log('afficher publications : ' + publications)
   // console.log('afficher setPublications : ' + setPublications)
@@ -80,6 +89,8 @@ function Profile() {
         // localStorage.clear()
         alert('message supprimé')
         // window.location = '/login'
+        window.location.reload(`/users/Profile/${user.id}`)
+        // window.location = `/users/Profile/${user.id}`
       })
 
       .catch((error) => {
@@ -129,13 +140,7 @@ function Profile() {
   
         {/* <!-- bloc avec tous le(s) message(s) --> */}
         <section className=" maRow p-3">
-          <div>
-            <span>
-              {' '}
-              Posté par {` ${user.firstname}`} le {user.createdAt}
-           
-            </span>
-          </div>
+         
   
           <div id="cardMessageImage" className="card">
             {publications.map((publication) => (

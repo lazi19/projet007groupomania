@@ -16,14 +16,15 @@ function FormApdate() {
       
           const requestOptions = {
             method: 'PUT',
-            // headers: { 'Content-Type': 'application/json' },
-            headers: {  Authorization: "Bearer " + user.token },
+            headers: { 'Content-Type': 'application/json' },
+            // headers: {  Authorization: "Bearer " + user.token },
             body: JSON.stringify({
                 
                 firstname : firstname,
                 lastname : lastname,
                 mail : mail,
-                password : password
+                password : password,
+                id : id
             })
           };
 
@@ -77,7 +78,7 @@ function FormApdate() {
                 
             <label htmlFor="mail" > E-mail         
                 <input 
-                class="form-control-plaintext mt-3 "
+                class="form-control-plaintext mt-3 bg-white "
                     type="mail"
                     id="mail"
                     name="mail"

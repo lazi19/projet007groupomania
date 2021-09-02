@@ -32,10 +32,12 @@ exports.getUserById = async (req, res) => {
 
 // Update user by id
 exports.updateUser = async (req, res) => {
+  console.log(req)
   try {
     await User.update(req.body, {
       where: {
-        id: req.params.id,
+        // id: req.params.id,
+        id : req.id,
       },
     });
     res.send({ message: "user Updated", "req.body": req.body });

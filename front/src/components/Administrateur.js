@@ -83,7 +83,7 @@ function Administrateur() {
            console.log(response);            
            // localStorage.clear()
            window.confirm ('Publication supprimé')
-        //   window.location.reload(true);
+          window.location.reload(true);
           return;
        })
        

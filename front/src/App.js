@@ -5,7 +5,7 @@ import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Profile from './components/Profile';
-import Commentaire from './components/Commentaire';
+// import Commentaire from './components/Commentaire';
 import Publication from './components/Publication';
 import Compte from './components/Compte';
 import Administrateur from './components/Administrateur';
@@ -54,9 +54,9 @@ function App() {
                             <Publication />
                       </Route>
 
-                       <Route  path="/users/Commentaire" >
+                       {/* <Route  path="/users/Commentaire" >
                             <Commentaire />
-                      </Route> 
+                      </Route>  */}
 
                        {/* <Route name = "commentaire" path="/users/Commentaire/:id" >
                             <Commentaire />

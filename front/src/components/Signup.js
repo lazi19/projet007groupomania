@@ -10,7 +10,15 @@ import '../styles/Signup.css';
 function Signup() {
     const { register, handleSubmit } = useForm();
     const [postId, setPostId] = useState(null);
-  
+    const user = JSON.parse(localStorage.getItem( "user"));
+    const [id, setId] = useState(null);
+    
+    if(user){
+        setId(user.id) ;
+        window.location = `/users/Profile/${id}`
+    }else{
+        <Link to="/Login"></Link> 
+    }
     function onSubmit(data) {
         // display form data on success
 
@@ -35,8 +43,9 @@ function Signup() {
             })
 
             .then((data)=> {
-                setPostId(data.id) 
+                setPostId(data.id) ;
                 window.location = "/Login"
+                // <Link to="/Login"></Link> 
             })
             .catch(err => {
                 //On traite ici les erreurs éventuellement survenues
@@ -85,7 +94,7 @@ function Signup() {
                             <input type="password"  id="password"  name="password"  required  placeholder="Enter Password "
                              minLength="8"
                              pattern="(?=.*\d)(?=.*[a-z]).{8,}"
-                             title= "Mot de pasese doit contenir au moins un chiffre et une lettre majuscule et minuscule et au moins 8 caractères ou plus"
+                             title= "Mot de pasese doit contenir au moins un chiffre, une lettre  et au moins 8 caractères ou plus"
                             {...register('password')}
                             />
                             <br /><br />

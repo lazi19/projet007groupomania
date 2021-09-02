@@ -7,7 +7,7 @@ const router = express.Router();
 
 const userCtrl = require("../controllers/user.js");
 
-const verifyPassword = require('../middleware/verifyPassword');
+// const verifyPassword = require('../middleware/verifyPassword');
 
 
 // Route get all users

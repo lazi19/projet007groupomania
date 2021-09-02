@@ -7,6 +7,15 @@ import { Link } from 'react-router-dom';
 import '../styles/Signup.css'
 
 function Login() {
+  const user = JSON.parse(localStorage.getItem( "user"));
+  const [id, setId] = useState(null);
+  
+  if(user){
+      setId(user.id) ;
+      window.location = `/users/Profile/${id}`
+  }else{
+      <Link to="/Login"></Link> 
+  }
 
   // const history = useHistory();
   //   console.log("history : " + history);
@@ -43,7 +52,7 @@ function Login() {
         // localStorage.setItem("isAuthenticated", "true")
         window.location = `/users/Profile/${data.id}`
 
-        if(data.id === 38){
+        if(data.id === 1){
           localStorage.setItem("isAdmin", "true")
         }else{
           localStorage.setItem("isAdmin", "false")

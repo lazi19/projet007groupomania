@@ -20,26 +20,27 @@ const fs = require("fs");
 
 // Routes CRUD : Create, Read, Update, Delete.
 
+
 exports.createMessage = (req, res, next) => {
   const reqBody = JSON.stringify(req.body)
-console.log(" reqBody:" + reqBody)
-  // console.log(" req.data.image :" +  req.body.data);
-  console.log(" req.body :" +  req.body);
-  console.log(" req.body.message :" + req.body.message);
-  // const messageObject = JSON.parse(req.body);
-  // console.log("messageObject :" + messageObject.message)
-  // const user = decodeId(req.headers.authorization);
-
-  // console.log("ligne 15 req.body" + req.body.messageUrl);
-  // const messageObject = JSON.parse(req.body.token);
-  // delete messageObject.token;
+  console.log(" reqBody:" + reqBody)
+  // console.log(" reqFile :" + reqBody.file)
+  // console.log(" reqMessage :" + reqBody.message)
+  console.log("ligne 29 : " + req.body.message)
+  // console.log("ligne 30 : " + req.body.file.filename)
+  console.log("ligne 31 : " + req.body.file)
+  console.log("ligne 32 : " + req.body.userId)
+  console.log("ligne 33 : " + req.file)
+  console.log(JSON.stringify(req.body));
+  
 
   let imagePost = "";
 
   if (req.file) {
-    imagePost = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
+    // imagePost = `${req.protocol}://${req.get("host")}/images/${
+    //   req.file.filename
+    // }`;
+    imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
   const message = new Message({
     // UserId: req.headers.authorization[1],

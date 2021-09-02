@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import TextField from "@material-ui/core/TextField";
+import '../styles/Publication.css';
 // import axios from 'axios';
 
 
 function Publication() {
 
   const recupData = JSON.parse(localStorage.getItem( "user"))
-  // const token = recupData.token;
+  const token = recupData.token;
   console.log(recupData)
    const userId =  recupData.id;
+
+   
   
    console.log("userId : " + userId)
     const [message, setMessage] = useState();
     const [file, setFile] = useState();
+
+  // const image = file.name
+
 
     const handleMessagePicture = (e) => {
          e.preventDefault();
@@ -27,28 +33,31 @@ function Publication() {
         data.append('file', file)
         data.append('userId', userId)
 
-        console.log("data : " + data);
+        console.log("data : " + data );
  
  
-    // Publication nouveau  message
-
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+      // Publication nouveau  message
+      console.log(file.name)
+    
+      
+      //   const requestOptions = {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json' },
         
-          body:  JSON.stringify({
-                      message,
-                      file,
-                      userId        
-          }),
-      };
+      //     body:  JSON.stringify({
+      //                 message,
+      //                 file,
+      //                 userId        
+      //     }),
+      // };
 
 
-      // const requestOptions = {
-      // method: 'POST',
-      // // body: JSON.stringify(data),
+      const requestOptions = {
+        
+      method: 'POST',
       // body: JSON.stringify(data),
-      // }
+      body: JSON.stringify(data)
+      }
       
       fetch('http://localhost:5000/api/messages', requestOptions)
           // .then(response => response.json())
@@ -62,6 +71,13 @@ function Publication() {
             // window.location = `/users/Profile/${userId}`
           })
           .catch((err) => console.log(err))
+      // axios
+      // .post('http://localhost:5000/api/messages', data, {
+      //   headers: { Authorization: "Bearer " + token },
+      // })
+      // .then((res) => console.log(res), alert("Message crée"))
+      // // .then(() => {document.location.reload()})
+      // .catch((err) => console.log(err));
     
 
       }else {
@@ -110,7 +126,7 @@ function Publication() {
         // enctype="multipart/form-data"
         >
           <div className="header p-1">
-            <h2 className="btn btn-dark">
+            <h2 className="btn btn-dark h2btn-dark">
               { recupData.firstname }  vous allez créer une nouvelle publication
             </h2>
           </div>
@@ -137,23 +153,23 @@ function Publication() {
                 }}
               />
         
-            </div>
+            </div><hr/>
             <div className="col-12 justify-content-center text-center">
               {/* <img alt="newImage" className="w-50 rounded" /> */}
+              
               <p className="text-center">
-                {' '}
-                un aperçu de votre post apparaîtra ici. Formats acceptés: jpg,
-                jpeg, png et gif.
+                Formats acceptés: jpg, jpeg, png et gif.
               </p>
             </div>
             <div className="col-12 justify-content-center">
               <div className="form-group justify-content-center">
-                <label htmlFor="File"> Choisir une photo  </label> {' '}
-                <input
+                <label htmlFor="File"></label>
+                <input 
                   type="file"
                   useRef="file"
-                  name="file"
-                  className="form-control-file"
+                  name="image"
+                  variant="contained"
+                  className="form-control-file  flex-wrap: wrap "
                   id="file"                 
                   multiple={false}
                   accept=".jpg, .jpeg, .gif, .png"
@@ -166,13 +182,14 @@ function Publication() {
                     setFile(file);
                   }}
                 /> 
+                 
               </div>
             </div>
           </div>
 
           <div className="  m-2 p-2 ">
                 <div>
-                  <button type="submit" className="btn btn-dark  m-2 p-2"  onClick={handleMessagePicture}  >
+                  <button type="submit" className="btn btn-dark  m-2 p-2  btnValider "   onClick={handleMessagePicture}  >
                     Valider
                   </button>
                  

@@ -9,19 +9,30 @@ import '../styles/Menu.css'
 
 
 function Menu() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    // const [id, setId] = useState(null);
+
+    // if(user){
+    //     setId(user.id) ;
+    //     window.location = `/users/Profile/${id}`
+    // }else{
+    //     <Link to="/Login"></Link> 
+    // } 
+    
+    // const id = user.id
 //window.location.basename path="/Signup"
 if(window.location.pathname === "/Signup" || window.location.pathname === "/Login"){
     return <header>
     <nav> 
-        <link>
-        </link>
-         <Link to="/">
+        {/* <link>
+        </link> */}
+         {/* <Link to="/"> */}
                 <img className="logo"  
                 // src="../img/logo.png"
                 src={logo} 
                 alt="Logo Groupomania "
                 />
-         </Link>                   
+         {/* </Link>                    */}
 
         <ul>
             <NavLink to="/Login">s'identifier</NavLink>
@@ -36,15 +47,15 @@ if(window.location.pathname === "/Signup" || window.location.pathname === "/Logi
 }else{
     return <header>
     <nav> 
-        <link>
-        </link>
-         <Link to="/">
+        {/* <link>
+        </link> */}
+         {/* <Link to="/"> */}
                 <img className="logo"  
                 // src="../img/logo.png"
                 src={logo} 
                 alt="Logo Groupomania "
                 />
-         </Link>                   
+         {/* </Link>                    */}
 
         <ul>
            
