@@ -36,8 +36,8 @@ function Publication() {
         console.log("data : " + data );
  
  
-      // Publication nouveau  message
-      console.log(file.name)
+        // Publication nouveau  message
+       console.log(file.name)
     
       
       //   const requestOptions = {
@@ -55,9 +55,11 @@ function Publication() {
       const requestOptions = {
         
       method: 'POST',
-      // body: JSON.stringify(data),
+      // body: data,
       body: JSON.stringify(data)
+
       }
+        console.log(JSON.stringify(data))
       
       fetch('http://localhost:5000/api/messages', requestOptions)
           // .then(response => response.json())

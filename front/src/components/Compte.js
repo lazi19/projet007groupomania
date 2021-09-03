@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import ReactDOM from 'react-dom';
+import React, { useState, MouseEvent } from "react";
+// import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import FormApdate from './FormApdate';
+// import FormApdate from './FormApdate';
 
 
 function Compte() {
@@ -14,7 +14,7 @@ function Compte() {
 
 
 
-    
+
 
     // const [state, setState] = useState();
 
@@ -50,14 +50,16 @@ function Compte() {
         window.location = `/users/Profile/${user.id}`
     }
    
-    // const handleUpdate = () =>  {
+    const handleUpdate = () =>  {
         
     //     // setState({ display: "none" })
     //      <Link to="/users/Compte/FormApdate/:id" component={FormApdate}></Link>
     //     // window.location = `/users/Compte/FormApdate/${user.id}`
-    //     // React.createElement(<div className='formUpdate'>affiche formulaire</div>)
-    
-    // }
+        React.createElement(<div className='formUpdate'>affiche formulaire</div>)
+    // return   <FormApdate/> 
+   
+    //  window.location = `/users/Compte/FormApdate/${user.id}`
+    }
 
 
 
@@ -86,9 +88,9 @@ function Compte() {
                         <div className="d-flex justify-content-center flex-wrap ">
                             <button type="button" className="btn btn-danger m-3 font-weight-bold " onClick={() => removeCompte(user.id)} >SUPPRIMER VOTRE COMPTE</button>
                             <button type="button" className="btn btn-secondary m-3 font-weight-bold "  onClick={handleClickAnnuler} >Annuler</button>
-                            {/* <button type="button" className="btn btn-secondary m-3 font-weight-bold "  
+                            <button type="button" className="btn btn-secondary m-3 font-weight-bold "  
                             onClick={handleUpdate}
-                             >changer les donnees</button> */}
+                             >changer vos donnees</button>
                                                         
                              {/* <Link to="/users/Compte/FormApdate" component={FormApdate}  > */}
                                 {/* <button type="button" className="btn btn-secondary m-3 font-weight-bold "
@@ -97,11 +99,11 @@ function Compte() {
                              {/* </Link>{' '} */}
 
                              
-                             <div type="button" className="btn btn-secondary m-3 font-weight-bold "
+                             {/* <div type="button" className="btn btn-secondary m-3 font-weight-bold "
                                 // onClick={handleUpdate}
                                 > changer vos données
                                 <Link to="/users/Compte/:id/FormApdate" component={FormApdate}  ></Link>
-                            </div>  
+                            </div>   */}
 
                         </div>
                         {/*  <div id="formUpdate" style={state({ display: "none" })}>

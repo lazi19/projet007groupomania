@@ -1,25 +1,10 @@
-
-
-
-// import {Comment} from "../models/index.js";
-const {Comment} = require ("../models/index.js")
 // import {User} from "../models/index.js";
-const {User} = require ("../models/index.js")
 const { Message } = require("../models/index"); // Importation du modèle User //
 const jwt = require("jsonwebtoken"); // Sécurisation de la connection grâce à des tokens uniques //
 // var multer = require('multer');
 const fs = require("fs");
 
-// const decodeId = (authorization) => {
-//   const token = authorization.split(" ")[1];
-//   const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
-//   return {
-//       id: decodedToken.userId,
-//   };
-// };
-
 // Routes CRUD : Create, Read, Update, Delete.
-
 
 exports.createMessage = (req, res, next) => {
   const reqBody = JSON.stringify(req.body)
@@ -37,10 +22,7 @@ exports.createMessage = (req, res, next) => {
   let imagePost = "";
 
   if (req.file) {
-    // imagePost = `${req.protocol}://${req.get("host")}/images/${
-    //   req.file.filename
-    // }`;
-    imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+      imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
   const message = new Message({
     // UserId: req.headers.authorization[1],
