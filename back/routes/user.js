@@ -7,9 +7,6 @@ const router = express.Router();
 
 const userCtrl = require("../controllers/user.js");
 
-// const verifyPassword = require('../middleware/verifyPassword');
-
-
 // Route get all users
 router.get("/", userCtrl.getAllUsers);
 // Route get user by id
@@ -19,11 +16,8 @@ router.put("/:id", auth, userCtrl.updateUser);
 // Route delete user by id
 router.delete("/:id", auth, userCtrl.deleteUser);
 
-
 // Route create a new user
-router.post("/" , userCtrl.createUser); // a la place de signup
-
-// router.post("/" , verifyPassword, userCtrl.createUser); // a la place de signup
+router.post("/", userCtrl.createUser); // a la place de signup
 
 //Route connection du user existant
 router.post("/login", userCtrl.login);

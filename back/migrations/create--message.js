@@ -19,36 +19,16 @@ module.exports = {
         },
         onDelete: "CASCADE",
       },
-      // userFirstname: {
-      //   allowNull: false,
-      //   type: Sequelize.INTEGER,
-      //   references: {
-      //     model: "Users",
-      //     key: "firstname",
-      //     as: "userFirstname",
-      //   },
-      //   onDelete: "CASCADE",
-      // },
-      message : {
+
+      message: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      messageUrl : {
+      messageUrl: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      // content: {
-      //   allowNull: false,
-      //   type: Sequelize.STRING,
-      // },
-      // likes: {
-      //   allowNull: true,
-      //   type: Sequelize.STRING,
-      // },
-      // attachment: {
-      //   allowNull: false,
-      //   type: Sequelize.STRING,
-      // },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

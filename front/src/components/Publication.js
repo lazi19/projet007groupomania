@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-// import TextField from "@material-ui/core/TextField";
 import '../styles/Publication.css'
-// import axios from 'axios';
 
 function Publication() {
   const recupData = JSON.parse(localStorage.getItem('user'))
   const token = recupData.token
-  console.log(recupData)
   const userId = recupData.id
 
-  console.log('userId : ' + userId)
   const [message, setMessage] = useState()
   const [file, setFile] = useState()
 
@@ -52,42 +47,14 @@ function Publication() {
   }
 
   const handleClickAnnuler = () => {
-   
     window.location = `/users/Profile/${userId}`
   }
-
-  // ********************************modification message existant
-
-  // const modifMessagePicture = (id) => {
-
-  //   console.log('Le lien a été cliqué.');
-  //   const requestOptions = {
-  //       method: 'update',
-  //       headers: {  Authorization: "Bearer " + recupData.token }
-  //       body: 
-  //   }
-
-  //   fetch( `http://localhost:5000/api/messages/${id}`, requestOptions)
-  //   .then((response) => {
-  //       console.log(response);
-
-  //       // localStorage.clear()
-  //       alert('message modifier')
-  //       // window.location = '/login'
-  //     })
-
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // }
 
   return (
     <>
       {/* Un seul bloc pour le contenu creation message  */}
       <section className="row card bg-light m-5 p-3">
-        <form
-        // enctype="multipart/form-data"
-        >
+        <form>
           <div className="header p-1">
             <h2 className="btn btn-dark h2btn-dark">
               {recupData.firstname} vous allez créer une nouvelle publication
@@ -148,18 +115,6 @@ function Publication() {
                 Valider
               </button>
 
-              {/* <button type="submit" className="btn btn-dark  m-2 p-2"  
-                  onClick={modifMessagePicture}  
-                  >
-                    Modifier message
-                  </button> */}
-
-              {/* <Link to="/users/Profile">
-                    <div className="btn btn-danger   m-2 p-2">
-                      {' '}
-                      Annuler/Retour
-                    </div>
-                  </Link> */}
               <button
                 type="button"
                 className="btn btn-danger m-3 font-weight-bold "

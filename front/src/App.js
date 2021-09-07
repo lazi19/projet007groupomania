@@ -8,7 +8,7 @@ import Profile from './components/Profile';
 import Publication from './components/Publication';
 import Compte from './components/Compte';
 import Administrateur from './components/Administrateur';
-import FormApdate from './components/FormApdate';
+import FormUpdate from './components/FormUpdate';
 
 import ErrorPage from './components/ErrorPage';
 
@@ -61,12 +61,12 @@ function App() {
                             <Administrateur />
                       </Route>
 
-                      <Route  path="/FormApdate" >
-                              <FormApdate />
+                      <Route  path="/FormUpdate" >
+                              <FormUpdate />
                       </Route> 
                       
-                       <Route  path="/users/Compte/FormApdate/:id" > 
-                              <FormApdate />
+                       <Route  path="/users/Compte/FormUpdate/:id" > 
+                              <FormUpdate />
                              
                       </Route> 
                        

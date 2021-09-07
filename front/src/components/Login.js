@@ -1,24 +1,19 @@
-
 // import React, { Component } from 'react';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom';
-// import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import '../styles/Signup.css'
 
 function Login() {
-  const user = JSON.parse(localStorage.getItem( "user"));
-  const [id, setId] = useState(null);
-  
-  if(user){
-      setId(user.id) ;
-      window.location = `/users/Profile/${id}`
-  }else{
-      <Link to="/Login"></Link> 
-  }
+  const user = JSON.parse(localStorage.getItem('user'))
+  const [id, setId] = useState(null)
 
-  // const history = useHistory();
-  //   console.log("history : " + history);
+  if (user) {
+    setId(user.id)
+    window.location = `/users/Profile/${id}`
+  }else {
+    <Link to="/Login"></Link>
+  }
 
   const { register, handleSubmit } = useForm()
   const [postId, setPostId] = useState(null)
@@ -37,13 +32,13 @@ function Login() {
     }
 
     fetch('http://localhost:5000/api/users/login', requestOptions)
-    .then((response) => {
-      console.log(response)
-      if (response.status !== 200) {
-        throw new Error(response.status);        
-      }
-      return response.json()
-    })
+      .then((response) => {
+        console.log(response)
+        if (response.status !== 200) {
+          throw new Error(response.status)
+        }
+        return response.json()
+      })
 
       .then((data) => {
         setPostId(data.id)
@@ -52,17 +47,18 @@ function Login() {
         // localStorage.setItem("isAuthenticated", "true")
         window.location = `/users/Profile/${data.id}`
 
-        if(data.id === 1){
-          localStorage.setItem("isAdmin", "true")
-        }else{
-          localStorage.setItem("isAdmin", "false")
+        if (data.id === 1) {
+          localStorage.setItem('isAdmin', 'true')
+        } else {
+          localStorage.setItem('isAdmin', 'false')
         }
       })
-      .catch((error)=>{
-        console.log(error + "  Utilisateur non trouvé ou Mot de passe incorrect !" );
-        alert(error + " Utilisateur non trouvé ou Mot de passe incorrect !")
+      .catch((error) => {
+        console.log(
+          error + '  Utilisateur non trouvé ou Mot de passe incorrect !'
+        )
+        alert(error + ' Utilisateur non trouvé ou Mot de passe incorrect !')
       })
-     
   }
 
   return (
@@ -84,9 +80,8 @@ function Login() {
               name="firstname"
               required
               placeholder="Votre Prenom"
-              {...register('firstname')} 
+              {...register('firstname')}
             />
-           
           </div>
 
           <div className="formMail">
@@ -97,9 +92,8 @@ function Login() {
               name="mail"
               required
               placeholder="email@serveur.com"
-              {...register('mail')} 
+              {...register('mail')}
             />
-           
           </div>
 
           <div className="formPassword">
@@ -132,6 +126,7 @@ function Login() {
       </fieldset>
     </div>
   )
+
 }
 
 export default Login
