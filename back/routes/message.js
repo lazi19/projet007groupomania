@@ -11,7 +11,7 @@ const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
 
 // Route create a new message
-router.post("/", multer, messageCtrl.createMessage);
+router.post("/", auth, multer, messageCtrl.createMessage);
 
 router.get("/", messageCtrl.getAllMessages);
 

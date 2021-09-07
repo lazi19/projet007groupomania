@@ -5,7 +5,6 @@ import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Profile from './components/Profile';
-// import Commentaire from './components/Commentaire';
 import Publication from './components/Publication';
 import Compte from './components/Compte';
 import Administrateur from './components/Administrateur';
@@ -17,8 +16,7 @@ import ErrorPage from './components/ErrorPage';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  // Link
+  Route 
 } from "react-router-dom";
 
 
@@ -42,10 +40,7 @@ function App() {
                       <Route  path="/Login">
                             <Login />
                       </Route>
-
-                      {/* <Route >
-                            <ErrorPage />
-                      </Route> */}
+                      
                       <Route  path="/users/Profile" >
                             <Profile />
                       </Route>
@@ -54,15 +49,6 @@ function App() {
                             <Publication />
                       </Route>
 
-                       {/* <Route  path="/users/Commentaire" >
-                            <Commentaire />
-                      </Route>  */}
-
-                       {/* <Route name = "commentaire" path="/users/Commentaire/:id" >
-                            <Commentaire />
-                      </Route>  */}
-
-
                       <Route  path="/users/Compte" >
                             <Compte />
                       </Route>
@@ -70,20 +56,19 @@ function App() {
                       <Route  path="/users/Profile/:id">
                             <Profile />
                       </Route>
-                      {/* <Route path="/users/:id" component={Profile} /> */}
-                      
+                                           
                       <Route  path="/users/Administrateur" >
                             <Administrateur />
                       </Route>
-{/* 
+
                       <Route  path="/FormApdate" >
                               <FormApdate />
                       </Route> 
-                       */}
-                      <Route  path="/users/Compte/FormApdate/:id" >
+                      
+                       <Route  path="/users/Compte/FormApdate/:id" > 
                               <FormApdate />
                              
-                      </Route>
+                      </Route> 
                        
 
                       <Route  component={ErrorPage} />

@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken"); // Sécurisation de la connection grâce à
 
 const { User } = require("../models/index"); // Importation du modèle User //
 
-
 // Get all users
 
 exports.getAllUsers = async (req, res) => {
@@ -32,12 +31,15 @@ exports.getUserById = async (req, res) => {
 
 // Update user by id
 exports.updateUser = async (req, res) => {
-  console.log(req)
+  console.log("hello");
+  console.log("req.body.id : " + req.body.id);
+  console.log("req.params.id : " + req.params.id);
+  console.log("req.body : " + req.body);
   try {
     await User.update(req.body, {
       where: {
-        // id: req.params.id,
-        id : req.id,
+        id: req.params.id,
+        // id : req.body.id,
       },
     });
     res.send({ message: "user Updated", "req.body": req.body });
@@ -46,13 +48,37 @@ exports.updateUser = async (req, res) => {
   }
 };
 
+// exports.updateUser = async (req, res) => {
+// const user = new User({
+//     lastname: req.body.lastname,
+//     firstname: req.body.firstname,
+//     mail : req.body.mail,
+//     password : req.body.password,
+//     id : req.body.id
+
+//   });
+//   User.updateOne({id: req.body.id}, user).then(
+//     () => {
+//       res.status(201).json({
+//         message: 'User updated successfully!'
+//       });
+//     }
+//   ).catch(
+//     (error) => {
+//       res.status(400).json({
+//         error: error
+//       });
+//     }
+//   );
+
+// }
+
 // Delete user by id
+
 exports.deleteUser = async (req, res) => {
   try {
     await User.destroy({
       where: {
-        // id: user.id ||
-        // req.session.destroy();
         id: req.params.id,
       },
     });
@@ -62,9 +88,7 @@ exports.deleteUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error });
   }
-
 };
-
 
 // Pour que l'utilisateur se connecte
 exports.login = (req, res, next) => {

@@ -1,22 +1,23 @@
-import React, { useState, MouseEvent } from "react";
+
+import React, { useState, MouseEvent, Wrapper } from "react";
 // import ReactDOM from 'react-dom';
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom';
-// import FormApdate from './FormApdate';
+import FormApdate from './FormApdate';
 
 
 function Compte() {
     const user = JSON.parse(localStorage.getItem('user'))
     console.log(user)
+    const id = user.id
     console.log("id : " + user.id)
     const history = useHistory();
     console.log("history:" + history );
+    const [lastname, setLastname] = useState('')
+  const [firstname, setFirstname] = useState('')
+  const [mail, setMail] = useState('')
+  const [password, setPassword] = useState('')
 
-
-
-
-
-    // const [state, setState] = useState();
 
     const removeCompte = (id) => {
       
@@ -49,19 +50,51 @@ function Compte() {
         // window.location = '/users/Profile'
         window.location = `/users/Profile/${user.id}`
     }
+
+    // *********************changement des données
+
+    // const injectFormApdate = () => {
+    //     window.location =  `/users/Compte/FormApdate/${id}`
+    // //    return   <FormApdate />
+    
+    // }
    
     const handleUpdate = () =>  {
+        document.getElementById('injecterFormApdate').innerHTML = `afficher le component FormApdate
         
-    //     // setState({ display: "none" })
-    //      <Link to="/users/Compte/FormApdate/:id" component={FormApdate}></Link>
-    //     // window.location = `/users/Compte/FormApdate/${user.id}`
-        React.createElement(<div className='formUpdate'>affiche formulaire</div>)
-    // return   <FormApdate/> 
-   
-    //  window.location = `/users/Compte/FormApdate/${user.id}`
+        
+        <label htmlFor="lastname">Nom
+                    <input
+                    type="text"
+                        id="lastname"
+                        name="lastname"
+                        required
+                        placeholder="Votre Nom"
+                        value={lastname}
+                        onChange={e => setLastname(e.target.value)}
+                        />
+                 </label>
+
+        <input
+        style={{ background: 'none', borderBottom: ' 2px solid gray' }}
+        type="password"
+        id="password"
+        name="password"
+        value={password}
+        onChange={e => {setPassword(e.target.value)
+        }}
+        placeholder="Mot de passe "
+        minLength="8"
+        pattern="(?=.*\d)(?=.*[a-z]).{8,}"
+        title="Mot de pasese doit contenir au moins un chiffre, une lettre  et au moins 8 caractères ou plus"
+      />`
+        
+      // injectFormApdate()  
+
+    //  window.location = `/users/Compte/FormApdate/${id}`
+
+
     }
-
-
 
     return (
         <main className="container" >
@@ -89,8 +122,13 @@ function Compte() {
                             <button type="button" className="btn btn-danger m-3 font-weight-bold " onClick={() => removeCompte(user.id)} >SUPPRIMER VOTRE COMPTE</button>
                             <button type="button" className="btn btn-secondary m-3 font-weight-bold "  onClick={handleClickAnnuler} >Annuler</button>
                             <button type="button" className="btn btn-secondary m-3 font-weight-bold "  
-                            onClick={handleUpdate}
-                             >changer vos donnees</button>
+                                // onClick={injectFormApdate}
+                                onClick={() => handleUpdate(user.id)}
+                            >
+                                 changer vos donnees  
+                                 {/* <Link to="/users/Compte/FormApdate/:id" component={FormApdate}  ></Link> */}
+                           </button>
+                             <div id="injecterFormApdate"></div>
                                                         
                              {/* <Link to="/users/Compte/FormApdate" component={FormApdate}  > */}
                                 {/* <button type="button" className="btn btn-secondary m-3 font-weight-bold "

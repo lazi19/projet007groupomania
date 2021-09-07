@@ -3,41 +3,30 @@ const { Message } = require("../models/index"); // Importation du modèle User /
 const jwt = require("jsonwebtoken"); // Sécurisation de la connection grâce à des tokens uniques //
 // var multer = require('multer');
 const fs = require("fs");
+const User = require("../models/User");
 
 // Routes CRUD : Create, Read, Update, Delete.
 
 exports.createMessage = (req, res, next) => {
-  const reqBody = JSON.stringify(req.body)
-  console.log(" reqBody:" + reqBody)
-  // console.log(" reqFile :" + reqBody.file)
-  // console.log(" reqMessage :" + reqBody.message)
-  console.log("ligne 29 : " + req.body.message)
-  // console.log("ligne 30 : " + req.body.file.filename)
-  console.log("ligne 31 : " + req.body.file)
-  console.log("ligne 32 : " + req.body.userId)
-  console.log("ligne 33 : " + req.file)
-  console.log(JSON.stringify(req.body));
-  
 
   let imagePost = "";
 
-  if (req.file) {
-      imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-  }
+    if (req.file) {
+        imagePost = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+    }
   const message = new Message({
-    // UserId: req.headers.authorization[1],
-    // UserId: req.body.UserId,
     message: req.body.message,
     messageUrl: imagePost,
-    // messageUrl: req.file.filename,
-    userId:  req.body.userId
+    //  `${req.protocol}://${req.get("host")}/images/${req.file.filename }`,
+    userId: req.body.userId,
   });
-  console.log(message);
+
   message
     .save()
     .then(() => res.status(201).json({ message: "Publication réussie" }))
     .catch((error) => res.status(400).json({ error }));
 };
+
 
 exports.getMessageById = (req, res, next) => {
   // On utilise la méthode findOne et on lui passe l'objet de comparaison, on veut que l'id de la sauce soit le même que le paramètre de requête
@@ -78,19 +67,9 @@ exports.deleteMessage = (req, res, next) => {
     .json({ message: "Message supprimé" })
 )
 .catch((error) => res.status(500).json({ error }));
-
-  
-  
-    // .then((message) => {
-    //   const filename = message.imageUrl.split("/images/")[1];
-    //   fs.unlink(`images/${filename}`, () => {
-    //     Message.deleteOne({ id: req.params.id })
-    //       .then(() => res.status(200).json({ message: "Message supprimé !" }))
-    //       .catch((error) => res.status(400).json({ error }));
-    //   });
-    // })
-    // .catch((error) => res.status(500).json({ error }));
 };
+
+
 
 exports.getAllMessages = (req, res, next) => {
   Message.findAll()
@@ -98,3 +77,48 @@ exports.getAllMessages = (req, res, next) => {
     .then((messages) => res.status(200).json(messages))
     .catch((error) => res.status(400).json({ error }));
 };
+
+
+// exports.getAllMessages = (req, res, next) => {
+//   Message.findAll({
+//     include: { model: User,  attributes: ["firstname"]}, 
+//   })
+
+//     .then(messages => {
+//       const list = messages.map(message => {
+//         return Object.assign({},
+//           {
+//             id:         message.id,
+//             createdAt:  message.createdAt,
+//             message:    message.message,
+//             messageUrl: message.messageUrl,
+//             userId:     message.userId,
+//             userName:   message.User.firstname           
+//           }
+//         )
+//     })
+//      res.status(200).json({list})
+//   })
+//     .catch((error) => res.status(400).json({ error }));
+// };
+
+
+
+
+// exports.getAllMessages = (req, res, next) => {
+//   Message.findAll()
+//   .then(async (messages) => {
+//     const messageUser = message.map(async (message) => {
+//       const user = await User.findOne({
+//         where: {id : message.userId,
+//         },
+//       });
+//       return{...message, user};
+//     });
+//     console.log(messageUrl);
+//     return messageUrl;
+//   })
+
+//     .then((messages) => res.status(200).json(messages))
+//     .catch((error) => res.status(400).json({ error }));
+// };

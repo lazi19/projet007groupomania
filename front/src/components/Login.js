@@ -83,7 +83,7 @@ function Login() {
               id="firstname"
               name="firstname"
               required
-              placeholder="Votre Nom"
+              placeholder="Votre Prenom"
               {...register('firstname')} 
             />
            
@@ -109,7 +109,7 @@ function Login() {
               id="password"
               name="password"
               required
-              placeholder="Enter Password "
+              placeholder="Mot de passe "
               {...register('password')}
             />
             <br />

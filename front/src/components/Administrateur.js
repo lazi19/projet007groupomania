@@ -102,7 +102,9 @@ function Administrateur() {
                     <section className="container ">
                         <div className="row maRow d-flex   ">
                             <div className=" col col-8 justify-content-end ">
-                                <h3 className="fs-4 ">
+                                <h3 className=" fs-5 " 
+                                // style={{fontSize:18}}
+                                >
                                 {' '}
                                 Bienvenue <span>{` ${user.firstname}`}</span>
                                 </h3>
@@ -126,10 +128,11 @@ function Administrateur() {
                                 {users.map((user) => (
                                     <div key={user.id}>
                                         <div>
-                                            <h4> {user.firstname} {user.lastname}</h4>
+                                        
+                                            <h4 className=" fs-6 "  > Compte de  {user.firstname} {user.lastname}</h4>
                                             {/* <h4> {` ${user.firstname}`} {` ${user.lastname}`}</h4> */}
                                         </div>
-                                        <span> utilisateur créé le {user.createdAt}</span>
+                                        <span>  créé le {user.createdAt}</span>
                                         <div>
                                             <button id="maBtn" className="maBtn" 
                                             onClick={ () => SupprimerComptes(user.id) }
@@ -152,23 +155,29 @@ function Administrateur() {
                             onClick={AfficherPublications}>
                                 Afficher toutes les publications
                             </button>
-                            <div>
+                            <div className="card p-3"  >
                                 {publications.map((publication) => (
                                     <div key={publication.id}>
 
                                         <span> Posté par  {publication.userId} ,  {publication.createdAt}</span>
-                                        <div className="img">                                        
+                                        <div className="img justify-content-center d-flex " > 
+
+                                        {publication.messageUrl && (                                    
                                             <img
-                                                src={publication.file}
+                                                src={publication.messageUrl}
                                                 id="image"
                                                 alt="mon_image"
-                                                width="400"
-                                                className="card-img-top"
+                                                width="100"
+                                                className="card-img-top img-thumbnail w-75 m-4"
                                             />
+                                            )}
                                         </div>
 
                                         <div>
+                                        {publication.message !== 'null' &&
+                                         publication.message !== 'undefined' && ( 
                                             <p className="p-3" id="message">{ publication.message }</p>
+                                            )}   
                                         </div>
 
                                         <div>

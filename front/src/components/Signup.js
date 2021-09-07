@@ -64,7 +64,7 @@ function Signup() {
                         <div className="formNom">
 
                             <label htmlFor="lastname">Nom </label>
-                            <input  type="text"  id="lastname"  name="lastname"  required  placeholder="Votre Nnom"
+                            <input  type="text"  id="lastname"  name="lastname"  required  placeholder="Votre Nom"
                             {...register('lastname')}  
                             />
 
@@ -73,7 +73,7 @@ function Signup() {
                         <div className="formPrenom">
 
                             <label htmlFor="firstname">Prenom </label>
-                            <input  type="text"  id="firstname"  name="firstname"  required  placeholder="Votre Nnom"
+                            <input  type="text"  id="firstname"  name="firstname"  required  placeholder="Votre Prénom"
                             {...register('firstname')} 
                             />
                            
@@ -91,7 +91,7 @@ function Signup() {
                         <div className="formPassword">
 
                             <label htmlFor="password">Mot de passe</label>
-                            <input type="password"  id="password"  name="password"  required  placeholder="Enter Password "
+                            <input type="password"  id="password"  name="password"  required  placeholder="Mot de passe "
                              minLength="8"
                              pattern="(?=.*\d)(?=.*[a-z]).{8,}"
                              title= "Mot de pasese doit contenir au moins un chiffre, une lettre  et au moins 8 caractères ou plus"
