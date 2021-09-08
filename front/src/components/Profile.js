@@ -6,7 +6,7 @@ import Administrateur from './Administrateur'
 function Profile() {
   const user = JSON.parse(localStorage.getItem('user'))
   const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
-  const token = JSON.parse(localStorage.getItem('isAdmin'))
+  const token = JSON.parse(localStorage.getItem('token'))
   const [publications, setPublications] = useState([])
 
   if (!user) {
@@ -38,7 +38,11 @@ function Profile() {
 
     const requestOptions = {
       method: 'DELETE',
-      headers: { Authorization: 'Bearer ' + token },
+      // headers: { Authorization: 'Bearer ' + token },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer' + token,
+     },
     }
 
     fetch(`http://localhost:5000/api/messages/${id}`, requestOptions)

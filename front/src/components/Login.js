@@ -7,6 +7,7 @@ import '../styles/Signup.css'
 function Login() {
   const user = JSON.parse(localStorage.getItem('user'))
   const [id, setId] = useState(null)
+ 
 
   if (user) {
     setId(user.id)
@@ -38,13 +39,13 @@ function Login() {
           throw new Error(response.status)
         }
         return response.json()
+
       })
 
       .then((data) => {
         setPostId(data.id)
-        console.log(data)
         localStorage.setItem('user', JSON.stringify(data))
-        // localStorage.setItem("isAuthenticated", "true")
+        localStorage.setItem('token', JSON.stringify(data.token))
         window.location = `/users/Profile/${data.id}`
 
         if (data.id === 1) {

@@ -3,13 +3,18 @@ import FormUpdate from './FormUpdate'
 
 function Compte() {
   const user = JSON.parse(localStorage.getItem('user'))
-  const token = localStorage.getItem('token')
+  const token = JSON.parse(localStorage.getItem('token'))
+
+  
   const [displayUpdate, setDisplayUpdate] = useState(false)
 
   const removeCompte = (id) => {
+    
     const requestOptions = {
       method: 'DELETE',
-      headers: { Authorization: 'Bearer ' + token },
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
     }
 
     fetch(`http://localhost:5000/api/users/${id}`, requestOptions)

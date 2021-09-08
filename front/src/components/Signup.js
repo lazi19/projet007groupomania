@@ -16,7 +16,7 @@ function Signup() {
     setId(user.id)
     window.location = `/users/Profile/${id}`
   } else {
-    ;<Link to="/Login"></Link>
+    <Link to="/Login"></Link>
   }
 
   function onSubmit(data) {
