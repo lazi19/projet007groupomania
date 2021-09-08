@@ -3,7 +3,7 @@ import '../styles/Publication.css'
 
 function Publication() {
   const recupData = JSON.parse(localStorage.getItem('user'))
-  const token = recupData.token
+  const token = JSON.parse(localStorage.getItem('token'))
   const userId = recupData.id
 
   const [message, setMessage] = useState()
