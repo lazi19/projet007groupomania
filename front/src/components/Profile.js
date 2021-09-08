@@ -38,11 +38,8 @@ function Profile() {
 
     const requestOptions = {
       method: 'DELETE',
-      // headers: { Authorization: 'Bearer ' + token },
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer' + token,
-     },
+       headers: { Authorization: 'Bearer ' + token },
+ 
     }
 
     fetch(`http://localhost:5000/api/messages/${id}`, requestOptions)

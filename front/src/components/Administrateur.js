@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import { Link } from 'react-router-dom'
 
 function Administrateur() {
   const [users, setUsers] = useState([])
   const [publications, setPublications] = useState([])
   const user = JSON.parse(localStorage.getItem('user'))
-  const token = localStorage.getItem('token')
+  const token = JSON.parse(localStorage.getItem('token'))
   
   // se deconnecter
   const Logout = () => {
-    localStorage.removeItem('user')
+    localStorage.clear()
     window.location = '/Login'
   }
   // suppression d'un compte
